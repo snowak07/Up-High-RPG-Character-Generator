@@ -168,62 +168,62 @@ PROFESSIONS = [
         "scenarios": [
             {
                 "scenario": "Your training was more difficult than most. Test Str to influence Dex.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Assigned to carry the heaviest load. Test Str to influence Con.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Con"
             },
             {
                 "scenario": "The commander asked to see a test of your marksmanship. Test Dex to influence Str.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Fled a losing battle. Test Dex to influence Con.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Con"
             },
             {
                 "scenario": "Sustained a major injury. Test Con to influence Str.",
-                "tested_skill": "Con",
+                "tested_ability": "Con",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Captured. Test Con to influence Dex.",
-                "tested_skill": "Con",
+                "tested_ability": "Con",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Considered for officer training. Test Str to influence Int.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Int"
             },
             {
                 "scenario": "Fellow scouting party depended on you. Test Dex to influence Cha.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "Starving and forced to forage for your own food. Test Con to influence Wis.",
-                "tested_skill": "Con",
+                "tested_ability": "Con",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Tried a risky tactic involving stealth. Test Int to influence Dex.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Walked into an ambush. Test Wis to influence Str.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Attempted to befriend the cook. Test Cha to influence Con.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Con"
             },
             {
@@ -282,62 +282,62 @@ PROFESSIONS = [
         "scenarios": [
             {
                 "scenario": "Recited scripture from memory to an audience. Test Int to influence Wis.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Taught the doctrine to the neophytes. Test Int to influence Cha.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "Debated your faith with the infidels. Test Wis to influence Int.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Int"
             },
             {
                 "scenario": "A tragedy shook your faith. Test Wis to influence Cha.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "Had a great/horrible relationship with your mentor. Test Cha to influence Int.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Int"
             },
             {
                 "scenario": "Received a visitation from your god. Test Cha to influence Wis.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Responsible for calling the faithful to their daily prayer. Test Int to influence Dex.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Attempted a great labor for your god. You worked until collapse. Test Wis to influence Con.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Con"
             },
             {
                 "scenario": "You often carried and prepared the bodies before the funeral. Test Cha to influence Str.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Traveled to study with a distant branch of your faith. Test Con to influence Int.",
-                "tested_skill": "Con",
+                "tested_ability": "Con",
                 "influenced_skill": "Int"
             },
             {
                 "scenario": "You helped build/repair a church/holy site. Test Str to influence Wis.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Tried to avert disaster during a wedding/baptism. Test Dex to influence Cha.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Cha"
             },
             {
@@ -396,62 +396,62 @@ PROFESSIONS = [
         "scenarios": [
             {
                 "scenario": "The boss asked you to crack a lot of skulls. Test Str to influence Dex.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "You survived your initiation in a dramatic fashion. Test Str to influence Cha.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "You'll never forget the first time you killed someone. Test Dex to influence Str.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "The boss personally asked you to steal something important. Test Dex to influence Cha.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "You were tasked with killing a friend to prove your loyalty. Test Cha to influence Str.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "You had a complicated relationship with the people you extorted. Test Cha to influence Dex.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Entered a lethal-force duel. Test Str to influence Wis.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Stole from a wizard. Test Dex to influence Int.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Int"
             },
             {
                 "scenario": "Your “friendly” rival is a fan of poison. Test Cha to influence Con.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Con"
             },
             {
                 "scenario": "Spent some time in prison. Test Con to influence Str.",
-                "tested_skill": "Con",
+                "tested_ability": "Con",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Had a mentor. Test Int to influence Dex.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Made a lot of friends/enemies on that street. Test Wis to influence Cha.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Cha"
             },
             {
@@ -510,62 +510,62 @@ PROFESSIONS = [
         "scenarios": [
             {
                 "scenario": "Fought off a beast with only a knife. Test Str to influence Dex.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Unable to find your way home, you made a new home. Test Str to influence Wis.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Trapped for days. You thought you were going to die. Test Dex to influence Str.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Encountered the elves. Test Dex to influence Wis.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Hunger made you weak. Test Wis to influence Str.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Heard voices on the wind. Test Wis to influence Dex.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Trusted a stranger enough to share food with them. Test Str to influence Cha.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "You have been hunted. Test Dex to influence Con.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Con"
             },
             {
                 "scenario": "Followed tracks that you didn't recognize. Test Wis to influence Int.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Int"
             },
             {
                 "scenario": "Tracked down a human, and fought them. Test Int to influence Str.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Encountered the fey. Test Cha to influence Wis.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Dysentery was awful. Test Con to influence Dex.",
-                "tested_skill": "Con",
+                "tested_ability": "Con",
                 "influenced_skill": "Dex"
             },
             {
@@ -624,62 +624,62 @@ PROFESSIONS = [
         "scenarios": [
             {
                 "scenario": "Attempted to read all of the books that you own. Test Dex to influence Int.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Int"
             },
             {
                 "scenario": "Seduced someone of a higher/lower social class. Test Dex to influence Cha.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "Involved in blackmail. Test Int to influence Dex.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Aspirations to wear the crown. Test Int to influence Cha.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "Involved in a scandalous relationship. Test Cha to influence Dex.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Lied to your tutor (that old fool). Test Cha to influence Int.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Cha"
             },
             {
                 "scenario": "You love/hate practicing with your swordmaster. Test Dex to influence Con.",
-                "tested_skill": "Dex",
+                "tested_ability": "Dex",
                 "influenced_skill": "Con"
             },
             {
                 "scenario": "Once saw a demon summoned at a party. Test Int to influence Wis.",
-                "tested_skill": "Int",
+                "tested_ability": "Int",
                 "influenced_skill": "Wis"
             },
             {
                 "scenario": "Tried to avoid actual combat in the war. Test Cha to influence Str.",
-                "tested_skill": "Cha",
+                "tested_ability": "Cha",
                 "influenced_skill": "Str"
             },
             {
                 "scenario": "Member of an archery/polo/yacht club. Test Con to influence Dex.",
-                "tested_skill": "Con",
+                "tested_ability": "Con",
                 "influenced_skill": "Dex"
             },
             {
                 "scenario": "Member of (mostly social, somewhat strange) secret society. Test Str to influence Int.",
-                "tested_skill": "Str",
+                "tested_ability": "Str",
                 "influenced_skill": "Int"
             },
             {
                 "scenario": "Manipulated with your own betrothal. Test Wis to influence Cha.",
-                "tested_skill": "Wis",
+                "tested_ability": "Wis",
                 "influenced_skill": "Cha"
             },
             {
@@ -744,4 +744,17 @@ PROFESSIONS = [
         "profession": "Wizard's Apprentice",
         "hint": "(Useful: Dex, Int, and Wis)",
     }
+]
+
+RANDOM_SKILLS = [
+    "Alchemy", "Animal Handling", "Architecture", "Astronomy", "Bureaucracy", "Beg", "Blacksmithing", "Booze", "Butcher", "Carpentry",
+    "Carouse", "Caves", "Comedy", "Cooking", "Criminals", "Cults", "Dance", "Demons", "Deserts", "Disguise",
+    "Drugs", "Drums", "Dwarves", "Elves", "Engineering", "Etiquette", "Fashion", "Farms", "Fishing", "Flutes",
+    "Folklore", "Forests", "Forgery", "Fortune Telling", "Gambling", "Geography", "Geology", "Gossip", "Guitars", "Halflings",
+    "Harps", "Heraldry", "History", "Horses", "Jewelry", "Jungle", "Lakes", "Lang. (Northspeak)", "Lang. (Oldspeak)", "Lang. (Southspeak)",
+    "Law", "Linguistics", "Literature", "Locale (E. Country)", "Locale (N. Country)", "Locale (S. Country)", "Locale (W. Country)", "Locale (Far Country)", "Locks", "Lutes",
+    "Maps", "Medicine", "Merchants", "Military", "Money", "Mountains", "Navigation", "Necromancers", "Nobles", "Oceans",
+    "Orcs", "Pick Pockets", "Philosophy", "Plains", "Poetry", "Religion (Forest God)", "Religion (Moon God)", "Religion (Ocean God)", "Religion (Sun God)", "Research",
+    "Rivers", "Roads", "Royalty", "Scavenge", "Sailing", "Sex", "Sing", "Smuggling", "Swamps", "Tailoring",
+    "Teach", "Track", "Trumpets", "Tundras", "Paint", "Warfare", "Weapons", "Weather", "Wizards", "Writing"
 ]

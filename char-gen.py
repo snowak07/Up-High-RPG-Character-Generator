@@ -70,7 +70,7 @@ def main():
     
     adolescence_question_dict = constants.ADOLESCENT_DECISION_ROLL_MAP[adolescence_initial_roll_index]
     for question in adolescence_question_dict:
-        higher_ability_chosen = stringInputHandlingAndValidation(question['question'] + ': \n', question['options'])
+        higher_ability_chosen = stringInputHandlingAndValidation(question['question'] + ': \n', question['options']).upper()
 
         # Roll 2d6 and apply higher to chosen and lower to other option
         print("\nNow Roll 2d6")
@@ -89,11 +89,95 @@ def main():
 
     profession_choices = []
     profession_rolls = []
+    profession_test_results = []
+    learned_skills = []
+    adv_disadv = {
+        'STR': 0,
+        'DEX': 0,
+        'CON': 0,
+        'INT': 0,
+        'WIS': 0,
+        'CHA': 0
+    }
 
     for i in range(1, 7):
-        profession_choices.append(stringInputHandlingAndValidation(f'Choose a profession for your adult period ({i} of 6): ', profession_names_list))
-        profession_rolls.append(intInputHandlingAndValidation('Roll a d24 (d2 + d12): ', 1, 24))
+        current_profession_choice = stringInputHandlingAndValidation(f'Available Professions: \n\n\t|Army|Clergy|Criminal|Forest|Noble|Rural|Town|Wizard\'s Apprentice|\n\nChoose a profession for your adult period ({i} of 6): ', profession_names_list).capitalize()
+        profession_choices.append(current_profession_choice)
         
+        current_profession_roll = intInputHandlingAndValidation('Roll a d24 (d2 + d12): \n', 1, 24)
+        current_profession_index = current_profession_roll - 1
+        profession_rolls.append(current_profession_roll)
+
+        profession_index = profession_names_list.index(current_profession_choice)
+        current_profession = constants.PROFESSIONS[profession_index]
+        current_scenario = current_profession['scenarios'][current_profession_index]
+        
+        if "tested_ability" in current_scenario:
+            # Roll d12 compare against tested ability
+            roll_result = intInputHandlingAndValidation(current_scenario['scenario'] + ' (Roll a d12): ', 1, 12)
+            current_tested_ability = current_scenario['tested_ability'].upper()
+            tested_ability_score = ability_totals[current_tested_ability]
+            if roll_result <= tested_ability_score:
+                adv_disadv[current_tested_ability] += 1
+            else:
+                adv_disadv[current_tested_ability] -= 1
+            
+            profession_test_results.append(roll_result)
+
+        elif "learned_skill" in current_scenario:
+            learned_skill = "ERROR"
+            if current_scenario['learned_skill'] == "Random":
+                # Roll d100
+                roll_result = intInputHandlingAndValidation(current_scenario['scenario'] + ' (Roll a d100 to determine skill): ', 1, 100)
+                roll_result_index = roll_result - 1
+                learned_skill = constants.RANDOM_SKILLS[roll_result_index]
+            else:
+                learned_skill = current_scenario['learned_skill']
+            print('\nYour skill is: ' + learned_skill + '!')
+            learned_skills.append(learned_skill)
+
+    print('\nNow for the final rolls...\n\n')
+
+    # Roll with adv/disadv for each of the stats.
+    str_addendum = 'take highest' if adv_disadv['STR'] > 0 else ''
+    str_addendum = 'take lowest' if adv_disadv['STR'] < 0 else str_addendum
+    adult_str_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['STR']) + 1) + 'd6 ' + str_addendum + ': ', 1, 6)
+    ability_totals['STR'] += adult_str_result
+
+    dex_addendum = 'take highest' if adv_disadv['DEX'] > 0 else ''
+    dex_addendum = 'take lowest' if adv_disadv['DEX'] < 0 else dex_addendum
+    adult_dex_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['DEX']) + 1) + 'd6 ' + dex_addendum + ': ', 1, 6)
+    ability_totals['DEX'] += adult_dex_result
+
+    con_addendum = 'take highest' if adv_disadv['CON'] > 0 else ''
+    con_addendum = 'take lowest' if adv_disadv['CON'] < 0 else con_addendum
+    adult_con_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['CON']) + 1) + 'd6 ' + con_addendum + ': ', 1, 6)
+    ability_totals['CON'] += adult_con_result
+
+    int_addendum = 'take highest' if adv_disadv['INT'] > 0 else ''
+    int_addendum = 'take lowest' if adv_disadv['INT'] < 0 else int_addendum
+    adult_int_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['INT']) + 1) + 'd6 ' + int_addendum + ': ', 1, 6)
+    ability_totals['INT'] += adult_int_result
+
+    wis_addendum = 'take highest' if adv_disadv['WIS'] > 0 else ''
+    wis_addendum = 'take lowest' if adv_disadv['WIS'] < 0 else wis_addendum
+    adult_wis_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['WIS']) + 1) + 'd6 ' + wis_addendum + ': ', 1, 6)
+    ability_totals['WIS'] += adult_wis_result
+
+    cha_addendum = 'take highest' if adv_disadv['CHA'] > 0 else ''
+    cha_addendum = 'take lowest' if adv_disadv['CHA'] < 0 else cha_addendum
+    adult_cha_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['CHA']) + 1) + 'd6 ' + cha_addendum + ': ', 1, 6)
+    ability_totals['CHA'] += adult_cha_result
+
+    print(f'''
+    --------------------------------
+    Final Results:
+    |STR ({ability_totals['STR']})|DEX ({ability_totals['DEX']})|CON ({ability_totals['CON']})|INT ({ability_totals['INT']})|WIS ({ability_totals['WIS']})|CHA ({ability_totals['CHA']})|
+
+    Skills: {learned_skills}
+    --------------------------------
+    ''')
+
         # TODO: Ask each of the scenario questions and keep track of successes and failures. Ask for appropriate
         # advantage/disadvantage roll for each stat.
 
@@ -120,8 +204,8 @@ def stringInputHandlingAndValidation(prompt, accepted_values):
     accepted_values = list(map(lambda value: value.upper(), accepted_values))
     while True:
         try:
-            return_value = str(input(prompt)).upper()
-            if not return_value in accepted_values:
+            return_value = str(input(prompt))
+            if not return_value.upper() in accepted_values:
                 print("\nInput must be one of the following values: ", accepted_values)
                 continue
             return return_value
