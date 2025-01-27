@@ -2,7 +2,10 @@ import constants
 import math
 import sys
 
-def main():
+# TODO: Summarize backstory with chatGPT
+# TODO: Print backstory and stats to a text file.
+
+def printWelcomeMessage():
     print('''
 -----------------------------------------------
 | Welcome to the Up High Character Generator! |
@@ -13,7 +16,8 @@ Order of ability checks will be as follows:
 STR, DEX, CON, INT, WIS, CHA
 -----------------------------------------------''')
 
-    ability_totals = {
+def initialize_abilities():
+    return {
         'STR': 0,
         'DEX': 0,
         'CON': 0,
@@ -22,182 +26,219 @@ STR, DEX, CON, INT, WIS, CHA
         'CHA': 0
     }
 
-    #################### CHILDHOOD ####################
-    print ('\nStarting with childhood...\n')
-    childhood_str_roll_result = intInputHandlingAndValidation('Roll a d12 for STR: ', 1, 12)
-    ability_totals['STR'] += math.ceil(childhood_str_roll_result / 2)
-    childhood_str_map_index = childhood_str_roll_result - 1
-    childhood_str_lore_snippet = constants.CHILDHOOD_STR_ROLL_MAP[childhood_str_map_index]
-    print(childhood_str_lore_snippet)
+def main():
+    printWelcomeMessage()
 
-    childhood_dex_roll_result = intInputHandlingAndValidation('Roll a d12 for DEX: ', 1, 12)
-    ability_totals['DEX'] += math.ceil(childhood_dex_roll_result / 2)
-    childhood_dex_map_index = childhood_dex_roll_result - 1
-    childhood_dex_lore_snippet = constants.CHILDHOOD_DEX_ROLL_MAP[childhood_dex_map_index]
-    print(childhood_dex_lore_snippet)
-
-    childhood_con_roll_result = intInputHandlingAndValidation('Roll a d12 for CON: ', 1, 12)
-    ability_totals['CON'] += math.ceil(childhood_con_roll_result / 2)
-    childhood_con_map_index = childhood_con_roll_result - 1
-    childhood_con_lore_snippet = constants.CHILDHOOD_CON_ROLL_MAP[childhood_con_map_index]
-    print(childhood_con_lore_snippet)
-
-    childhood_int_roll_result = intInputHandlingAndValidation('Roll a d12 for INT: ', 1, 12)
-    ability_totals['INT'] += math.ceil(childhood_int_roll_result / 2)
-    childhood_int_map_index = childhood_int_roll_result - 1
-    childhood_int_lore_snippet = constants.CHILDHOOD_INT_ROLL_MAP[childhood_int_map_index]
-    print(childhood_int_lore_snippet)
-
-    childhood_wis_roll_result = intInputHandlingAndValidation('Roll a d12 for WIS: ', 1, 12)
-    ability_totals['WIS'] += math.ceil(childhood_wis_roll_result / 2)
-    childhood_wis_map_index = childhood_wis_roll_result - 1
-    childhood_wis_lore_snippet = constants.CHILDHOOD_WIS_ROLL_MAP[childhood_wis_map_index]
-    print(childhood_wis_lore_snippet)
-
-    childhood_cha_roll_result = intInputHandlingAndValidation('Roll a d12 for CHA: ', 1, 12)
-    ability_totals['CHA'] += math.ceil(childhood_cha_roll_result / 2)
-    childhood_cha_map_index = childhood_cha_roll_result - 1
-    childhood_cha_lore_snippet = constants.CHILDHOOD_CHA_ROLL_MAP[childhood_cha_map_index]
-    print(childhood_cha_lore_snippet)
-
-    #################### ADOLESCENCE ####################
-    print("\nNow moving on to adolescence...")
-    adolescence_initial_roll_result = intInputHandlingAndValidation('Roll a d10: ', 1, 10)
-    adolescence_initial_roll_index = math.ceil(adolescence_initial_roll_result / 2) - 1
-    
-    adolescence_question_dict = constants.ADOLESCENT_DECISION_ROLL_MAP[adolescence_initial_roll_index]
-    for question in adolescence_question_dict:
-        higher_ability_chosen = stringInputHandlingAndValidation(question['question'] + ': ', question['options']).upper()
-
-        # Roll 2d6 and apply higher to chosen and lower to other option
-        print("\nNow Roll 2d6")
-        higher_ability_roll = intInputHandlingAndValidation('What is the higher roll?: ', 1, 6)
-        lower_ability_roll = intInputHandlingAndValidation('What is the lower roll?: ', 1, 6)
-
-        # Add to ability totals
-        ability_totals[higher_ability_chosen] += higher_ability_roll
-        for option in question['options']:
-            if option != higher_ability_chosen:
-                ability_totals[option] += lower_ability_roll
-
-    #################### ADULTHOOD ####################
-    print("\nNow finishing up with adulthood...\n")
-    profession_names_list = list(map(lambda profession: profession['profession'], constants.PROFESSIONS))
-
-    profession_choices = []
-    profession_rolls = []
-    profession_test_results = []
+    ability_totals = initialize_abilities()
+    adv_disadv = initialize_abilities()
     learned_skills = []
-    adv_disadv = {
-        'STR': 0,
-        'DEX': 0,
-        'CON': 0,
-        'INT': 0,
-        'WIS': 0,
-        'CHA': 0
-    }
+
+    childhood_backstory = handleChildhood(ability_totals)
+    adolescence_backstory = handleAdolescence(ability_totals)
+    adult_backstory = handleAdulthood(ability_totals, adv_disadv, learned_skills)
+
+    print('\n-----------------------------------------------')
+    print('Here is your full backstory:')
+    print(constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory))
+
+    printFinalResults(ability_totals, learned_skills)
+
+def handleChildhood(ability_totals):
+    childhood_backstory = []
+    for ability in ability_totals:
+        results = handleChildhoodStatRoll(ability)
+        ability_additive = results[1]
+        backstory_snippet = results[0]
+
+        childhood_backstory.append({
+            "ability": ability,
+            "backstory_snippet": backstory_snippet
+        })
+
+        ability_totals[ability] += ability_additive
+
+    return childhood_backstory
+
+def handleAdolescence(ability_totals):
+    print("\nNow moving on to adolescence...")
+    adolescence_backstory = []
+    adolescence_question_group_roll_result = intInputHandlingAndValidation('Roll a d10: ', 1, 10)
+    adolescence_question_group_roll_index = math.ceil(adolescence_question_group_roll_result / 2) - 1
+    adolescence_question_group_dict = constants.ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP[adolescence_question_group_roll_index]
+
+    for question in adolescence_question_group_dict:
+        results = handleAdolescenceStatRoll(question['question'], question['options'])
+        adolescence_backstory.append({
+            "question": question['question'],
+            "option_chosen": results[0]
+        })
+        ability_additives = results[1]
+        for ability, additive in ability_additives.items():
+            ability_totals[ability] += additive
+    
+    return adolescence_backstory
+
+def handleAdulthood(ability_totals, adv_disadv, learned_skills):
+    print("\nNow finishing up with adulthood...")
+    profession_names_list = [profession['profession'] for profession in constants.PROFESSIONS]
+    adult_backstory = []
 
     for i in range(1, 7):
-        current_profession_choice = stringInputHandlingAndValidation(f'Available Professions: \n\n\t|Army|Clergy|Criminal|Forest|Noble|Rural|Town|Wizard\'s Apprentice|\n\nChoose a profession for your adult period ({i} of 6): ', profession_names_list).capitalize()
-        profession_choices.append(current_profession_choice)
-        
-        current_profession_roll = intInputHandlingAndValidation('Roll a d24 (d2 + d12): ', 1, 24)
-        current_profession_index = current_profession_roll - 1
-        profession_rolls.append(current_profession_roll)
-
+        current_profession_choice = getProfessionChoice(profession_names_list, i)
         profession_index = profession_names_list.index(current_profession_choice)
-        current_profession = constants.PROFESSIONS[profession_index]
-        current_scenario = current_profession['scenarios'][current_profession_index]
+        current_scenario = getScenario(profession_names_list, profession_index)
+
+        backstory_element = {
+            "profession": current_profession_choice,
+            "scenario": current_scenario
+        }
         
         if "tested_ability" in current_scenario:
-            # Roll d12 compare against tested ability
-            testing_ability = current_scenario['tested_ability'].upper()
-            roll_result = intInputHandlingAndValidation(current_scenario['scenario'] + ' [' + testing_ability + ' (' + str(ability_totals[testing_ability]) + ')] ' +  '(Roll a d12): ', 1, 12)
-            current_tested_ability = current_scenario['tested_ability'].upper()
-            tested_ability_score = ability_totals[current_tested_ability]
-            if roll_result <= tested_ability_score:
-                print("\nSuccess!\n")
-                adv_disadv[current_tested_ability] += 1
-            else:
-                print("\nFailure!\n")
-                adv_disadv[current_tested_ability] -= 1
-            
-            profession_test_results.append(roll_result)
+            passed_test = processTestedAbilityScenario(current_scenario, ability_totals, adv_disadv)
+            backstory_element["scenario"]["passed_test"] = passed_test
 
         elif "learned_skill" in current_scenario:
-            learned_skill = "ERROR"
-            if current_scenario['learned_skill'] == "Random":
-                # Roll d100
-                roll_result = intInputHandlingAndValidation(current_scenario['scenario'] + ' (Roll a d100 to determine skill): ', 1, 100)
-                roll_result_index = roll_result - 1
-                learned_skill = constants.RANDOM_SKILLS[roll_result_index]
-            else:
-                learned_skill = current_scenario['learned_skill']
+            learned_skill = resolveSkill(current_scenario)
             print('\nYour skill is: ' + learned_skill + '!')
             learned_skills.append(learned_skill)
+            backstory_element["scenario"]["learned_skill"] = learned_skill
+        
+        adult_backstory.append(backstory_element)
 
+    handleFinalRolls(ability_totals, adv_disadv)
+
+    return adult_backstory
+
+def handleFinalRolls(ability_totals, adv_disadv):
     print('\nNow for the final rolls...\n')
 
-    # Roll with adv/disadv for each of the stats.
-    # str_addendum = 'take the highest' if adv_disadv['STR'] > 0 else ''
-    # str_addendum = 'take the lowest' if adv_disadv['STR'] < 0 else str_addendum
-    # adult_str_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['STR']) + 1) + 'd6 ' + str_addendum + ' for STR: ', 1, 6)
-    # ability_totals['STR'] += adult_str_result
-    ability_totals['STR'] += handleAdulthoodAdvDisadvStatRolls('STR', adv_disadv['STR'])
+    for ability in ability_totals:
+        ability_totals[ability] += handleAdulthoodAdvDisadvStatRoll(ability, adv_disadv[ability])
 
-    # dex_addendum = 'take the highest' if adv_disadv['DEX'] > 0 else ''
-    # dex_addendum = 'take the lowest' if adv_disadv['DEX'] < 0 else dex_addendum
-    # adult_dex_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['DEX']) + 1) + 'd6 ' + dex_addendum + ' for DEX: ', 1, 6)
-    # ability_totals['DEX'] += adult_dex_result
-    ability_totals['DEX'] += handleAdulthoodAdvDisadvStatRolls('DEX', adv_disadv['DEX'])
-
-    # con_addendum = 'take the highest' if adv_disadv['CON'] > 0 else ''
-    # con_addendum = 'take the lowest' if adv_disadv['CON'] < 0 else con_addendum
-    # adult_con_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['CON']) + 1) + 'd6 ' + con_addendum + ' for CON: ', 1, 6)
-    # ability_totals['CON'] += adult_con_result
-    ability_totals['CON'] += handleAdulthoodAdvDisadvStatRolls('CON', adv_disadv['CON'])
-
-    # int_addendum = 'take the highest' if adv_disadv['INT'] > 0 else ''
-    # int_addendum = 'take the lowest' if adv_disadv['INT'] < 0 else int_addendum
-    # adult_int_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['INT']) + 1) + 'd6 ' + int_addendum + ' for INT: ', 1, 6)
-    # ability_totals['INT'] += adult_int_result
-    ability_totals['INT'] += handleAdulthoodAdvDisadvStatRolls('INT', adv_disadv['INT'])
-
-    # wis_addendum = 'take the highest' if adv_disadv['WIS'] > 0 else ''
-    # wis_addendum = 'take the lowest' if adv_disadv['WIS'] < 0 else wis_addendum
-    # adult_wis_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['WIS']) + 1) + 'd6 ' + wis_addendum + ' for WIS: ', 1, 6)
-    # ability_totals['WIS'] += adult_wis_result
-    ability_totals['WIS'] += handleAdulthoodAdvDisadvStatRolls('WIS', adv_disadv['WIS'])
-
-    # cha_addendum = 'take the highest' if adv_disadv['CHA'] > 0 else ''
-    # cha_addendum = 'take the lowest' if adv_disadv['CHA'] < 0 else cha_addendum
-    # adult_cha_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv['CHA']) + 1) + 'd6 ' + cha_addendum + ' for CHA: ', 1, 6)
-    # ability_totals['CHA'] += adult_cha_result
-    ability_totals['CHA'] += handleAdulthoodAdvDisadvStatRolls('CHA', adv_disadv['CHA'])
-
+def printFinalResults(ability_totals, learned_skills):
     print(f'''
---------------------------------
+-----------------------------------------------
 Final Results:
 |STR ({ability_totals['STR']})|DEX ({ability_totals['DEX']})|CON ({ability_totals['CON']})|INT ({ability_totals['INT']})|WIS ({ability_totals['WIS']})|CHA ({ability_totals['CHA']})|
 
 Skills: {learned_skills}
---------------------------------
+-----------------------------------------------
 ''')
 
-        # TODO: Ask each of the scenario questions and keep track of successes and failures. Ask for appropriate
-        # advantage/disadvantage roll for each stat.
+def handleChildhoodStatRoll(ability):
+    childhood_ability_roll_result = intInputHandlingAndValidation('Roll a d12 for ' + ability + ': ', 1, 12)
+    ability_additive = math.ceil(childhood_ability_roll_result / 2)
 
-        # TODO: Print ability score totals and full lore readout (summarized together by chatGPT?)
+    lore_roll_map = {}
+    match ability:
+        case 'STR':
+            lore_roll_map = constants.CHILDHOOD_STR_ROLL_MAP
+        case 'DEX':
+            lore_roll_map = constants.CHILDHOOD_DEX_ROLL_MAP
+        case 'CON':
+            lore_roll_map = constants.CHILDHOOD_CON_ROLL_MAP
+        case 'INT':
+            lore_roll_map = constants.CHILDHOOD_INT_ROLL_MAP
+        case 'WIS':
+            lore_roll_map = constants.CHILDHOOD_WIS_ROLL_MAP
+        case 'CHA':
+            lore_roll_map = constants.CHILDHOOD_CHA_ROLL_MAP
+        case _:
+            raise ValueError('Invalid ability')
+    
+    childhood_ability_map_index = childhood_ability_roll_result - 1
+    childhood_ability_lore_snippet = lore_roll_map[childhood_ability_map_index]
+    print(childhood_ability_lore_snippet)
 
-        # TODO: Give additional full backstory writeup incorporating all generated elements.
+    return (childhood_ability_lore_snippet, ability_additive)
 
-        # TODO: Print backstory and stats to a text file.
+def handleAdolescenceStatRoll(question, options):
+    higher_ability_chosen = stringInputHandlingAndValidation('\n' + question + ': ', options).upper()
 
-def handleAdulthoodAdvDisadvStatRolls(ability, adv_disadv_amt):
-    ability_addendum = 'take the highest' if adv_disadv_amt > 0 else ''
-    ability_addendum = 'take the lowest' if adv_disadv_amt < 0 else ability_addendum
-    adult_ability_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv_amt) + 1) + 'd6 ' + ability_addendum + ' for ' + ability + ': ', 1, 6)
+    # Roll 2d6 and apply higher to chosen ability and lower to the other option
+    print("\nNow Roll 2d6")
+    higher_ability_roll = intInputHandlingAndValidation('What is the higher roll?: ', 1, 6)
+    lower_ability_roll = intInputHandlingAndValidation('What is the lower roll?: ', 1, 6)
+
+    # Add to dict that will be added to ability totals
+    sortAbilityRoll = lambda ability: higher_ability_roll if ability == higher_ability_chosen else lower_ability_roll
+    ability_additives = dict(map(lambda ability: (ability, sortAbilityRoll(ability)), options))
+    return (higher_ability_chosen, ability_additives)
+
+def getProfessionChoice(profession_names_list, period):
+    return stringInputHandlingAndValidation(f'\nAvailable Professions: \n\n\t|Army|Clergy|Criminal|Forest|Noble|Rural|Town|Wizard\'s Apprentice|\n\nChoose a profession for your adult period ({period} of 6): ', profession_names_list).capitalize()
+
+def getScenario(profession_names_list, profession_index):
+    # Roll for scenario within profession
+    current_scenario_roll = intInputHandlingAndValidation('Roll a d24 (d2 + d12): ', 1, 24)
+    current_scenario_index = current_scenario_roll - 1
+
+    # Get scenario data for chosen profession and roll
+    current_profession = constants.PROFESSIONS[profession_index]
+    current_scenario = current_profession['scenarios'][current_scenario_index]
+    return current_scenario
+
+def processTestedAbilityScenario(scenario, ability_totals, adv_disadv):
+    ability_to_test = scenario['tested_ability'].upper()
+    ability_score = ability_totals[ability_to_test]
+    passed_scenario = scenarioTest(scenario['explanation'], ability_to_test, ability_score)
+
+    influenced_ability = scenario['influenced_ability'].upper()
+    adv_disadv[influenced_ability] += 1 if passed_scenario else -1
+    print("\nSuccess!") if passed_scenario else print("\nFailure!")
+    return passed_scenario
+
+def resolveSkill(scenario):
+    learned_skill = ""
+    if scenario['learned_skill'] == "Random":
+        # Roll d100
+        roll_result = intInputHandlingAndValidation(scenario['explanation'] + ' (Roll a d100 to determine skill): ', 1, 100)
+        roll_result_index = roll_result - 1
+        learned_skill = constants.RANDOM_SKILLS[roll_result_index]
+    else:
+        learned_skill = scenario['learned_skill']
+    
+    return learned_skill
+
+def scenarioTest(scenario_explanantion, tested_ability, ability_score):
+    roll_result = intInputHandlingAndValidation(scenario_explanantion + ' [' + tested_ability + ' (' + str(ability_score) + ')] ' +  '(Roll a d12): ', 1, 12)
+    return roll_result <= ability_score
+
+def handleAdulthoodAdvDisadvStatRoll(ability, adv_disadv_amt):
+    ability_addendum = ' take the highest ' if adv_disadv_amt > 0 else ' '
+    ability_addendum = ' take the lowest ' if adv_disadv_amt < 0 else ability_addendum
+    adult_ability_result = intInputHandlingAndValidation('Roll ' + str(abs(adv_disadv_amt) + 1) + 'd6' + ability_addendum + 'for ' + ability + ': ', 1, 6)
     return adult_ability_result
+
+def constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory):
+    childhood_backstory_write_up = constructChildhoodBackstory(childhood_backstory)
+    adolescence_backstory_write_up = constructAdolescenceBackstory(adolescence_backstory)
+    adult_backstory_write_up = constructAdultBackstory(adult_backstory)
+    return '\n' + childhood_backstory_write_up + '\n' + adolescence_backstory_write_up + '\n' + adult_backstory_write_up
+
+def constructChildhoodBackstory(childhood_backstory):
+    childhood_backstory_write_up = 'Childhood:\n'
+    for entry in childhood_backstory:
+        childhood_backstory_write_up += entry['backstory_snippet'] + '\n'
+    return childhood_backstory_write_up
+
+def constructAdolescenceBackstory(adolescence_backstory):
+    adolescence_backstory_write_up = 'Adolescence:'
+    for entry in adolescence_backstory:
+        adolescence_backstory_write_up += '\n' + entry['question'] + '. \nYou chose the ' + entry['option_chosen'] + ' option. \n'
+    return adolescence_backstory_write_up
+
+def constructAdultBackstory(adult_backstory):
+    adult_backstory_write_up = 'Adulthood:'
+    adult_period = 1
+    for entry in adult_backstory:
+        adult_backstory_write_up += f"\nFor period {adult_period} of 6 your background was {entry['profession']}. You faced the following scenario: \n{entry['scenario']['explanation']}.\n"
+        if 'passed_test' in entry['scenario']:
+            adult_backstory_write_up += f"You {'succeeded' if entry['scenario']['passed_test'] else 'failed'} on the test.\n"
+        elif 'learned_skill' in entry['scenario']:
+            adult_backstory_write_up += f"You learned the skill: {entry['scenario']['learned_skill']}.\n"
+        adult_period += 1
+    return adult_backstory_write_up
 
 def intInputHandlingAndValidation(prompt, min_value, max_value):
     while True:
@@ -218,7 +259,7 @@ def stringInputHandlingAndValidation(prompt, accepted_values):
         try:
             return_value = str(input(prompt))
             if not return_value.upper() in accepted_values:
-                print("\nInput must be one of the following values: ", accepted_values)
+                print(f'\nERROR: Input must be one of the following values: {accepted_values}')
                 continue
             return return_value
         except KeyboardInterrupt:
