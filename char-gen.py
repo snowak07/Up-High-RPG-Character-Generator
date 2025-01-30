@@ -1,9 +1,23 @@
 import constants
+# import gpt_provider
 import math
 import sys
 
 # TODO: Summarize backstory with chatGPT
-# TODO: Print backstory and stats to a text file.
+
+printToFileEnabled = False
+summaryEnabled = False
+
+def handleArguments():
+    if (len(sys.argv) > 3):
+        print('Invalid number of arguments. Please provide at most 2 arguments.')
+        sys.exit()
+    elif (len(sys.argv) > 1):
+        for arg in sys.argv:
+            if (arg.lower() == 'print=true'):
+                printToFileEnabled = True
+            elif (arg.lower() == 'summary=true'):
+                summaryEnabled = True
 
 def printWelcomeMessage():
     print('''
@@ -29,12 +43,14 @@ def initialize_abilities():
         'CHA': 0
     }
 
-def printToFileEnabled():
-    if (len(sys.argv) > 1 and sys.argv[1].lower() == 'print=true'):
-        return True
-    return False
+# def printToFileEnabled():
+#     if (len(sys.argv) > 1 and sys.argv[1].lower() == 'print=true'):
+#         return True
+#     return False
 
 def main():
+    handleArguments()
+
     printWelcomeMessage()
     character_name = getCharacterName()
 
@@ -46,17 +62,17 @@ def main():
     adolescence_backstory = handleAdolescence(ability_totals)
     adult_backstory = handleAdulthood(ability_totals, adv_disadv, learned_skills)
 
-    if (printToFileEnabled()):
+    character_sheet = constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory)
+
+    # if (summaryEnabled):
+    #     character_sheet += gpt_provider.getGPTSummary(character_sheet)
+
+    if (printToFileEnabled):
         with open(character_name + ".txt", "a") as file:
-            character_sheet = constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory)
             print(character_sheet, file=file)
             file.close()
     else:
-        print(constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory))
-    # print('\n-----------------------------------------------')
-    # print('Here is your full backstory:')
-    # print(constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory))
-    # print(constructFinalResults(ability_totals, learned_skills))
+        print(character_sheet)
 
 def handleChildhood(ability_totals):
     childhood_backstory = []
