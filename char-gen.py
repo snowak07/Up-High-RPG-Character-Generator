@@ -16,6 +16,9 @@ Order of ability checks will be as follows:
 STR, DEX, CON, INT, WIS, CHA
 -----------------------------------------------''')
 
+def getCharacterName():
+    return input('\nWhat is your character\'s name?: ')
+
 def initialize_abilities():
     return {
         'STR': 0,
@@ -26,8 +29,14 @@ def initialize_abilities():
         'CHA': 0
     }
 
+def printToFileEnabled():
+    if (len(sys.argv) > 1 and sys.argv[1].lower() == 'print=true'):
+        return True
+    return False
+
 def main():
     printWelcomeMessage()
+    character_name = getCharacterName()
 
     ability_totals = initialize_abilities()
     adv_disadv = initialize_abilities()
@@ -37,11 +46,17 @@ def main():
     adolescence_backstory = handleAdolescence(ability_totals)
     adult_backstory = handleAdulthood(ability_totals, adv_disadv, learned_skills)
 
-    print('\n-----------------------------------------------')
-    print('Here is your full backstory:')
-    print(constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory))
-
-    printFinalResults(ability_totals, learned_skills)
+    if (printToFileEnabled()):
+        with open(character_name + ".txt", "a") as file:
+            character_sheet = constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory)
+            print(character_sheet, file=file)
+            file.close()
+    else:
+        print(constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory))
+    # print('\n-----------------------------------------------')
+    # print('Here is your full backstory:')
+    # print(constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory))
+    # print(constructFinalResults(ability_totals, learned_skills))
 
 def handleChildhood(ability_totals):
     childhood_backstory = []
@@ -115,15 +130,15 @@ def handleFinalRolls(ability_totals, adv_disadv):
     for ability in ability_totals:
         ability_totals[ability] += handleAdulthoodAdvDisadvStatRoll(ability, adv_disadv[ability])
 
-def printFinalResults(ability_totals, learned_skills):
-    print(f'''
+def constructFinalResults(ability_totals, learned_skills):
+    return f'''
 -----------------------------------------------
 Final Results:
 |STR ({ability_totals['STR']})|DEX ({ability_totals['DEX']})|CON ({ability_totals['CON']})|INT ({ability_totals['INT']})|WIS ({ability_totals['WIS']})|CHA ({ability_totals['CHA']})|
 
 Skills: {learned_skills}
 -----------------------------------------------
-''')
+'''
 
 def handleChildhoodStatRoll(ability):
     childhood_ability_roll_result = intInputHandlingAndValidation('Roll a d12 for ' + ability + ': ', 1, 12)
@@ -239,6 +254,14 @@ def constructAdultBackstory(adult_backstory):
             adult_backstory_write_up += f"You learned the skill: {entry['scenario']['learned_skill']}.\n"
         adult_period += 1
     return adult_backstory_write_up
+
+def constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory):
+    # return '\n-----------------------------------------------\n' + 'Here is your full backstory:\n' + constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory) + '\n' + constructFinalResults(ability_totals, learned_skills) + '\n'
+    return f'''\n-----------------------------------------------
+Here is your full backstory:
+    {constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory)}
+    {constructFinalResults(ability_totals, learned_skills)}
+    '''
 
 def intInputHandlingAndValidation(prompt, min_value, max_value):
     while True:
