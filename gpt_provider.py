@@ -1,9 +1,7 @@
 from openai import OpenAI
 import api_key_provider
 
-client = OpenAI(
-  api_key=api_key_provider.API_KEY
-)
+client = OpenAI()
 
 def getGPTSummary(prompt):
     completion = client.chat.completions.create(
