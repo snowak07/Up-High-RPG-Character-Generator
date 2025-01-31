@@ -1,14 +1,12 @@
 import constants
-# import gpt_provider
+import gpt_provider
 import math
 import sys
 
-# TODO: Summarize backstory with chatGPT
-
-printToFileEnabled = False
-summaryEnabled = False
-
 def handleArguments():
+    printToFileEnabled = False
+    summaryEnabled = False
+
     if (len(sys.argv) > 3):
         print('Invalid number of arguments. Please provide at most 2 arguments.')
         sys.exit()
@@ -18,6 +16,8 @@ def handleArguments():
                 printToFileEnabled = True
             elif (arg.lower() == 'summary=true'):
                 summaryEnabled = True
+
+    return (printToFileEnabled, summaryEnabled)
 
 def printWelcomeMessage():
     print('''
@@ -43,13 +43,8 @@ def initialize_abilities():
         'CHA': 0
     }
 
-# def printToFileEnabled():
-#     if (len(sys.argv) > 1 and sys.argv[1].lower() == 'print=true'):
-#         return True
-#     return False
-
 def main():
-    handleArguments()
+    (printToFileEnabled, summaryEnabled) = handleArguments()
 
     printWelcomeMessage()
     character_name = getCharacterName()
@@ -64,13 +59,13 @@ def main():
 
     character_sheet = constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory)
 
-    # if (summaryEnabled):
-    #     character_sheet += gpt_provider.getGPTSummary(character_sheet)
+    if (summaryEnabled):
+        summary = gpt_provider.getGPTSummary(character_sheet)
+        character_sheet += summary
 
     if (printToFileEnabled):
         with open(character_name + ".txt", "a") as file:
             print(character_sheet, file=file)
-            file.close()
     else:
         print(character_sheet)
 
@@ -112,6 +107,7 @@ def handleAdolescence(ability_totals):
 def handleAdulthood(ability_totals, adv_disadv, learned_skills):
     print("\nNow finishing up with adulthood...")
     profession_names_list = [profession['profession'] for profession in constants.PROFESSIONS]
+    print("profession_names_list", profession_names_list)
     adult_backstory = []
 
     for i in range(1, 7):
@@ -272,7 +268,6 @@ def constructAdultBackstory(adult_backstory):
     return adult_backstory_write_up
 
 def constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory):
-    # return '\n-----------------------------------------------\n' + 'Here is your full backstory:\n' + constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory) + '\n' + constructFinalResults(ability_totals, learned_skills) + '\n'
     return f'''\n-----------------------------------------------
 Here is your full backstory:
     {constructBackstory(childhood_backstory, adolescence_backstory, adult_backstory)}
