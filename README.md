@@ -8,7 +8,8 @@ NOTE: Might need to setup a python venv to install openai if you used Homebrew t
 NOTE: Use `source myenv/bin/activate` with each new terminal instance if you needed above step.
 
 # USAGE
-Run `python3 char-gen.py` to start the character generator.
+Run the following to start the character generator.
+```python3 char-gen.py```
 
 ### Parameters
 - `print=true` Prints the output to a txt file with your character name.
