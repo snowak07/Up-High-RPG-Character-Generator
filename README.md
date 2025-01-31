@@ -9,7 +9,9 @@ NOTE: Use `source myenv/bin/activate` with each new terminal instance if you nee
 
 # USAGE
 Run the following to start the character generator.
-```python3 char-gen.py```
+```
+python3 char-gen.py
+```
 
 ### Parameters
 - `print=true` Prints the output to a txt file with your character name.
