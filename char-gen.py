@@ -333,4 +333,8 @@ def stringInputHandlingAndValidation(prompt, accepted_values):
         except:
             print("Input must be one of the following values: ", accepted_values)
 
-main()
+try:
+    main()
+except KeyboardInterrupt:
+    # Cleanly handle keyboard interrupt exit
+    sys.exit(0)
