@@ -4,8 +4,10 @@ import math
 import sys
 
 def handleArguments():
-    printToFileEnabled = False
-    summaryEnabled = False
+    print_to_file_enabled = False
+    summary_enabled = False
+    load_backstory = False
+    backstory_file_path = ''
 
     if (len(sys.argv) > 3):
         print('Invalid number of arguments. Please provide at most 2 arguments.')
@@ -13,11 +15,19 @@ def handleArguments():
     elif (len(sys.argv) > 1):
         for arg in sys.argv:
             if (arg.lower() == 'print=true'):
-                printToFileEnabled = True
+                print_to_file_enabled = True
             elif (arg.lower() == 'summary=true'):
-                summaryEnabled = True
+                summary_enabled = True
+            elif (arg.lower() == 'load_backstory=true'):
+                load_backstory = True
+            elif (arg != 'char-gen.py'):
+                backstory_file_path = arg
 
-    return (printToFileEnabled, summaryEnabled)
+    if load_backstory and not backstory_file_path:
+        print('Please provide a file path to load the backstory from.')
+        sys.exit()
+
+    return (print_to_file_enabled, summary_enabled, load_backstory, backstory_file_path)
 
 def printWelcomeMessage():
     print('''
@@ -33,7 +43,7 @@ STR, DEX, CON, INT, WIS, CHA
 def getCharacterName():
     return input('\nWhat is your character\'s name?: ')
 
-def initialize_abilities():
+def initializeAbilities():
     return {
         'STR': 0,
         'DEX': 0,
@@ -44,13 +54,17 @@ def initialize_abilities():
     }
 
 def main():
-    (printToFileEnabled, summaryEnabled) = handleArguments()
+    (print_to_file_enabled, summary_enabled, load_backstory, backstory_file_path) = handleArguments()
+
+    if (load_backstory):
+        handleBackstoryLoad(backstory_file_path)
+        sys.exit()
 
     printWelcomeMessage()
     character_name = getCharacterName()
 
-    ability_totals = initialize_abilities()
-    adv_disadv = initialize_abilities()
+    ability_totals = initializeAbilities()
+    adv_disadv = initializeAbilities()
     learned_skills = []
 
     childhood_backstory = handleChildhood(ability_totals)
@@ -59,15 +73,24 @@ def main():
 
     character_sheet = constructCharacterSheet(ability_totals, learned_skills, childhood_backstory, adolescence_backstory, adult_backstory)
 
-    if (summaryEnabled):
+    if (summary_enabled):
         summary = gpt_provider.getGPTSummary(character_sheet)
         character_sheet += summary
 
-    if (printToFileEnabled):
-        with open(character_name + ".txt", "a") as file:
+    if (print_to_file_enabled):
+        with open(character_name + ".txt", "w") as file:
             print(character_sheet, file=file)
     else:
         print(character_sheet)
+
+def handleBackstoryLoad(backstory_file_path):
+    backstory_file_read = open(backstory_file_path, "r")
+    backstory = backstory_file_read.read()
+    backstory_summary = gpt_provider.getGPTSummary(backstory)
+
+    # Append summary to the same file
+    with open(backstory_file_path, "a") as file:
+        print(backstory_summary, file=file)
 
 def handleChildhood(ability_totals):
     childhood_backstory = []
