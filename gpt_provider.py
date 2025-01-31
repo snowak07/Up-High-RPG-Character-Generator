@@ -1,5 +1,4 @@
 from openai import OpenAI
-import api_key_provider
 
 client = OpenAI()
 

@@ -1,7 +1,12 @@
 import constants
-import gpt_provider
 import math
 import sys
+
+gpt_provider_enabled = True
+try:
+    import gpt_provider
+except ImportError:
+    gpt_provider_enabled = False
 
 def handleArguments():
     print_to_file_enabled = False
@@ -22,6 +27,10 @@ def handleArguments():
                 load_backstory = True
             elif (arg != 'char-gen.py'):
                 backstory_file_path = arg
+
+    if (summary_enabled or load_backstory) and not gpt_provider_enabled:
+        print('ERROR: openai package was not able to be loaded. Please remove the summary argument or check your openai installation.')
+        sys.exit()
 
     if load_backstory and not backstory_file_path:
         print('Please provide a file path to load the backstory from.')
