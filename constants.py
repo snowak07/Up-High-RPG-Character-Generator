@@ -961,7 +961,7 @@ PROFESSIONS = [
         ]
     },
     {
-        "profession": "Wizard",
+        "profession": "Wizard's Apprentice",
         "hint": "(Useful: Dex, Int, and Wis)",
         "scenarios": [
             {

@@ -138,14 +138,14 @@ def handleAdolescence(ability_totals):
 
 def handleAdulthood(ability_totals, adv_disadv, learned_skills):
     print("\nNow finishing up with adulthood...")
-    profession_names_list = [profession['profession'] for profession in constants.PROFESSIONS]
+    profession_names_list = [profession['profession'].lower() for profession in constants.PROFESSIONS]
     print("profession_names_list", profession_names_list)
     adult_backstory = []
 
     for i in range(1, 7):
         current_profession_choice = getProfessionChoice(profession_names_list, i)
         profession_index = profession_names_list.index(current_profession_choice)
-        current_scenario = getScenario(profession_names_list, profession_index)
+        current_scenario = getScenario(profession_index)
 
         backstory_element = {
             "profession": current_profession_choice,
@@ -225,9 +225,9 @@ def handleAdolescenceStatRoll(question, options):
     return (higher_ability_chosen, ability_additives)
 
 def getProfessionChoice(profession_names_list, period):
-    return stringInputHandlingAndValidation(f'\nAvailable Professions: \n\n\t|Army|Clergy|Criminal|Forest|Noble|Rural|Town|Wizard\'s Apprentice|\n\nChoose a profession for your adult period ({period} of 6): ', profession_names_list).capitalize()
+    return stringInputHandlingAndValidation(f'\nAvailable Professions: \n\n\t|Army|Clergy|Criminal|Forest|Noble|Rural|Town|Wizard\'s Apprentice|\n\nChoose a profession for your adult period ({period} of 6): ', profession_names_list).lower()
 
-def getScenario(profession_names_list, profession_index):
+def getScenario(profession_index):
     # Roll for scenario within profession
     current_scenario_roll = intInputHandlingAndValidation('Roll a d24 (d2 + d12): ', 1, 24)
     current_scenario_index = current_scenario_roll - 1
