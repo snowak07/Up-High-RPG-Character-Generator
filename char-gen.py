@@ -92,6 +92,7 @@ def main():
     else:
         print(character_sheet)
 
+# TODO: Breakup into backstory loading and adding summary. Combine add summary part with main() usage.
 def handleBackstoryLoad(backstory_file_path):
     backstory_file_read = open(backstory_file_path, "r")
     backstory = backstory_file_read.read()
@@ -101,6 +102,7 @@ def handleBackstoryLoad(backstory_file_path):
     with open(backstory_file_path, "a") as file:
         print(backstory_summary, file=file)
 
+# TODO: Backstory snippet class
 def handleChildhood(ability_totals):
     childhood_backstory = []
     for ability in ability_totals:
@@ -117,6 +119,7 @@ def handleChildhood(ability_totals):
 
     return childhood_backstory
 
+# TODO: Backstory snippet class
 def handleAdolescence(ability_totals):
     print("\nNow moving on to adolescence...")
     adolescence_backstory = []
@@ -136,6 +139,7 @@ def handleAdolescence(ability_totals):
     
     return adolescence_backstory
 
+# TODO: Backstory snippet class
 def handleAdulthood(ability_totals, adv_disadv, learned_skills):
     print("\nNow finishing up with adulthood...")
     profession_names_list = [profession['profession'].lower() for profession in constants.PROFESSIONS]
