@@ -87,7 +87,7 @@ def main():
         character_sheet += summary
 
     if (print_to_file_enabled):
-        with open(character_name + ".txt", "w") as file:
+        with open("generated_characters/" + character_name + ".txt", "w") as file:
             print(character_sheet, file=file)
     else:
         print(character_sheet)
