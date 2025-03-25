@@ -1,16 +1,20 @@
 # INSTALLATION
 python version >= 3.10 required.
 
+To run the discord bot you need the Discord Bot Token for the Character Generator bot from the Discord developer portal (link below). Set an environment variable to DISCORD_PYTHON_API_KEY
+- Warning! You have to reset the bot token to reveal it on the console. Doing so will disable existing environment variables.
+- https://discord.com/developers/applications
+
 For OpenAI integration you need the following additional setup:\
-- Environment variable called OPENAI_API_KEY set to your own api key.\
 - openai package installed e.g. `pip3 install openai`\
+- Environment variable called OPENAI_API_KEY set to your own api key.\
 NOTE: Might need to setup a python venv to install openai if you used Homebrew to install python.\
 NOTE: Use `source myenv/bin/activate` with each new terminal instance if you needed above step.
 
 # USAGE
 Run the following to start the character generator.
 ```
-python3 char-gen.py
+python3 character_generator_controller.py
 ```
 
 ### Parameters
@@ -21,6 +25,6 @@ python3 char-gen.py
 
 ### Examples
 ```
-python3 char-gen.py print=true summary=true
-python3 char-gen.py load_backstory=true ./path/to/file
+python3 character_generator_controller.py print=true summary=true
+python3 character_generator_controller.py load_backstory=true ./path/to/file
 ```

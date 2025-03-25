@@ -1,1080 +1,1368 @@
-CHILDHOOD_STR_ROLL_MAP = [
-    "You were picked on. (+1 to STR)",
-    "You killed your mother in childbirth. (+1 to STR)",
-    "Your siblings ate your food. (+2 to STR)",
-    "You never got enough to eat. (+2 to STR)",
-    "You followed your mother around. (+3 to STR)",
-    "You loved to climb. (+3 to STR)",
-    "You got in a lot of fights and lost most. (+4 to STR)",
-    "You wrestled your father. (+4 to STR)",
-    "You fought a huge dog. (+5 to STR)",
-    "You were a fat kid. (+5 to STR)",
-    "You got into a lot of of fights and won most. +6",
-    "You were a bully. +6"
-]
+ABILITY_NAMES = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']
 
-CHILDHOOD_DEX_ROLL_MAP = [
-    "You always overslept. (+1 to DEX)",
-    "You took a nasty fall. (+1 to DEX)",
-    "You broke something precious. (+2 to DEX)",
-    "You carried a blanket everywhere. (+2 to DEX)",
-    "You were an illegitimate child. (+3 to DEX)",
-    "You got caught stealing. (+3 to DEX)",
-    "Your father took you with him. (+4 to DEX)",
-    "You saw a man commit suicide. (+4 to DEX)",
-    "You were once trapped somewhere. (+5 to DEX)",
-    "You stole candy. (+5 to DEX)",
-    "You ran for your life. (+6 to DEX)",
-    "You killed an animal. (+6 to DEX)"
-]
-
-CHILDHOOD_CON_ROLL_MAP = [
-    "You almost died from a fever. (+1 to CON)",
-    "You preferred to stay indoors. (+1 to CON)",
-    "You broke an arm. (+2 to CON)",
-    "Your family is a small one. (+2 to CON)",
-    "You had an awkward puberty. (+3 to CON)",
-    "You learned to cook from your mom. (+3 to CON)",
-    "You remember when you became an orphan. (+4 to CON)",
-    "You know your family's secret. (+4 to CON)",
-    "Your siblings looked up to you. (+5 to CON)",
-    "You had the best holiday meals. (+5 to CON)",
-    "You have too many cousins. (+6 to CON)",
-    "You walked a very long distance. (+6 to CON)"
-]
-
-CHILDHOOD_INT_ROLL_MAP = [
-    "You've never read a book. (+1 to INT)",
-    "You were dropped on your head. (+1 to INT)",
-    "You learned from doing, not being taught. (+2 to INT)",
-    "You hated school. (+2 to INT)",
-    "You had a secret place. (+3 to INT)",
-    "You invented a code. (+3 to INT)",
-    "You caught a parent doing something bad. (+4 to INT)",
-    "You met a wizard! (+4 to INT)",
-    "You kept a diary. (+5 to INT)",
-    "Curiosity earned you more than a few scars. (+5 to INT)",
-    "Your mother taught you all the legends. (+6 to INT)",
-    "You drew a map. (+6 to INT)"
-]
-
-CHILDHOOD_WIS_ROLL_MAP = [
-    "You embarrassed yourself publicly. (+1 to WIS)",
-    "You got lost. Very lost. (+1 to WIS)",
-    "It was terrifying. (+2 to WIS)",
-    "You believed whatever your siblings said. (+2 to WIS)",
-    "You loved to explore. You never got lost. (+3 to WIS)",
-    "You planned a trip you never took. (+3 to WIS)",
-    "You remember when the strangers arrived. (+4 to WIS)",
-    "You have very early memories. (+4 to WIS)",
-    "You solved a mystery. (+5 to WIS)",
-    "You saw a ghost! (+5 to WIS)",
-    "You had a beloved pet. (+6 to WIS)",
-    "You had many imaginary friends. (+6 to WIS)"
-]
-
-CHILDHOOD_CHA_ROLL_MAP = [
-    "No one loved you. (+1 to CHA)",
-    "You ran away from home. (+1 to CHA)",
-    "Your friends mocked you behind your back. (+2 to CHA)",
-    "You didn't talk until very late. (+2 to CHA)",
-    "You grew up among strangers. (+3 to CHA)",
-    "A trusted person hurt you dearly. (+3 to CHA)",
-    "You received a precious gift. (+4 to CHA)",
-    "People traveled to see you. (+4 to CHA)",
-    "You'd do anything on a dare. (+5 to CHA)",
-    "You had an army of friends. (+5 to CHA)",
-    "You were the favorite. (+6 to CHA)",
-    "An enemy became a lifelong friend. (+6 to CHA)"
-]
+CHILDHOOD_ROLL_MAPS = {
+    "STR": [
+        {
+            "lore": "You were picked on.",
+            "bonus": 1
+        },
+        {
+            "lore": "You killed your mother in childbirth.",
+            "bonus": 1
+        },
+        {
+            "lore": "Your siblings ate your food.",
+            "bonus": 2
+        },
+        {
+            "lore": "You never got enough to eat.",
+            "bonus": 2
+        },
+        {
+            "lore": "You followed your mother around.",
+            "bonus": 3
+        },
+        {
+            "lore": "You loved to climb.",
+            "bonus": 3
+        },
+        {
+            "lore": "You got in a lot of fights and lost most.",
+            "bonus": 4
+        },
+        {
+            "lore": "You wrestled your father.",
+            "bonus": 4
+        },
+        {
+            "lore": "You fought a huge dog.",
+            "bonus": 5
+        },
+        {
+            "lore": "You were a fat kid.",
+            "bonus": 5
+        },
+        {
+            "lore": "You got into a lot of fights and won most.",
+            "bonus": 6
+        },
+        {
+            "lore": "You were a bully.",
+            "bonus": 6
+        }
+    ],
+    "DEX": [
+        {
+            "lore": "You always overslept.",
+            "bonus": 1
+        },
+        {
+            "lore": "You took a nasty fall.",
+            "bonus": 1
+        },
+        {
+            "lore": "You broke something precious.",
+            "bonus": 2
+        },
+        {
+            "lore": "You carried a blanket everywhere.",
+            "bonus": 2
+        },
+        {
+            "lore": "You were an illegitimate child.",
+            "bonus": 3
+        },
+        {
+            "lore": "You got caught stealing.",
+            "bonus": 3
+        },
+        {
+            "lore": "Your father took you with him.",
+            "bonus": 4
+        },
+        {
+            "lore": "You saw a man commit suicide.",
+            "bonus": 4
+        },
+        {
+            "lore": "You were once trapped somewhere.",
+            "bonus": 5
+        },
+        {
+            "lore": "You stole candy.",
+            "bonus": 5
+        },
+        {
+            "lore": "You ran for your life.",
+            "bonus": 6
+        },
+        {
+            "lore": "You killed an animal.",
+            "bonus": 6
+        }
+    ],
+    "CON": [
+        {
+            "lore": "You almost died from a fever.",
+            "bonus": 1
+        },
+        {
+            "lore": "You preferred to stay indoors.",
+            "bonus": 1
+        },
+        {
+            "lore": "You broke an arm.",
+            "bonus": 2
+        },
+        {
+            "lore": "Your family is a small one.",
+            "bonus": 2
+        },
+        {
+            "lore": "You had an awkward puberty.",
+            "bonus": 3
+        },
+        {
+            "lore": "You learned to cook from your mom.",
+            "bonus": 3
+        },
+        {
+            "lore": "You remember when you became an orphan.",
+            "bonus": 4
+        },
+        {
+            "lore": "You know your family's secret.",
+            "bonus": 4
+        },
+        {
+            "lore": "Your siblings looked up to you.",
+            "bonus": 5
+        },
+        {
+            "lore": "You had the best holiday meals.",
+            "bonus": 5
+        },
+        {
+            "lore": "You have too many cousins.",
+            "bonus": 6
+        },
+        {
+            "lore": "You walked a very long distance.",
+            "bonus": 6
+        }
+    ],
+    "INT": [
+        {
+            "lore": "You've never read a book.",
+            "bonus": 1
+        },
+        {
+            "lore": "You were dropped on your head.",
+            "bonus": 1
+        },
+        {
+            "lore": "You learned from doing, not being taught.",
+            "bonus": 2
+        },
+        {
+            "lore": "You hated school.",
+            "bonus": 2
+        },
+        {
+            "lore": "You had a secret place.",
+            "bonus": 3
+        },
+        {
+            "lore": "You invented a code.",
+            "bonus": 3
+        },
+        {
+            "lore": "You caught a parent doing something bad.",
+            "bonus": 4
+        },
+        {
+            "lore": "You met a wizard!",
+            "bonus": 4
+        },
+        {
+            "lore": "You kept a diary.",
+            "bonus": 5
+        },
+        {
+            "lore": "Curiosity earned you more than a few scars.",
+            "bonus": 5
+        },
+        {
+            "lore": "Your mother taught you all the legends.",
+            "bonus": 6
+        },
+        {
+            "lore": "You drew a map.",
+            "bonus": 6
+        }
+    ],
+    "WIS": [
+        {
+            "lore": "You embarrassed yourself publicly.",
+            "bonus": 1
+        },
+        {
+            "lore": "You got lost. Very lost.",
+            "bonus": 1
+        },
+        {
+            "lore": "It was terrifying.",
+            "bonus": 2
+        },
+        {
+            "lore": "You believed whatever your siblings said.",
+            "bonus": 2
+        },
+        {
+            "lore": "You loved to explore. You never got lost.",
+            "bonus": 3
+        },
+        {
+            "lore": "You planned a trip you never took.",
+            "bonus": 3
+        },
+        {
+            "lore": "You remember when the strangers arrived.",
+            "bonus": 4
+        },
+        {
+            "lore": "You have very early memories.",
+            "bonus": 4
+        },
+        {
+            "lore": "You solved a mystery.",
+            "bonus": 5
+        },
+        {
+            "lore": "You saw a ghost!",
+            "bonus": 5
+        },
+        {
+            "lore": "You had a beloved pet.",
+            "bonus": 6
+        },
+        {
+            "lore": "You had many imaginary friends.",
+            "bonus": 6
+        }
+    ],
+    "CHA": [
+        {
+            "lore": "No one loved you.",
+            "bonus": 1
+        },
+        {
+            "lore": "You ran away from home.",
+            "bonus": 1
+        },
+        {
+            "lore": "Your friends mocked you behind your back.",
+            "bonus": 2
+        },
+        {
+            "lore": "You didn't talk until very late.",
+            "bonus": 2
+        },
+        {
+            "lore": "You grew up among strangers.",
+            "bonus": 3
+        },
+        {
+            "lore": "A trusted person hurt you dearly.",
+            "bonus": 3
+        },
+        {
+            "lore": "You received a precious gift.",
+            "bonus": 4
+        },
+        {
+            "lore": "People traveled to see you.",
+            "bonus": 4
+        },
+        {
+            "lore": "You'd do anything on a dare.",
+            "bonus": 5
+        },
+        {
+            "lore": "You had an army of friends.",
+            "bonus": 5
+        },
+        {
+            "lore": "You were the favorite.",
+            "bonus": 6
+        },
+        {
+            "lore": "An enemy became a lifelong friend.",
+            "bonus": 6
+        }
+    ]
+}
 
 ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP = [
     [
         {
-            "question": "Things had taken a turn for the worse. You needed to succeed here, but the risks were great. \n\t - Did you grit your teeth and wade in (STR) \n\t - or back off and retry it when you were better prepared (DEX)?",
-            "options": ["STR", "DEX"]
+            "question": "Things had taken a turn for the worse. You needed to succeed here, but the risks were great.",
+            "question_options": {
+                "STR": "Did you grit your teeth and wade in (STR)",
+                "DEX": "Back off and retry it when you were better prepared (DEX)"
+            },
+            "answer_options": ["STR", "DEX"]
         },
         {
-            "question": "You were about to deliver bad news. It would break their heart. \n\t - Were you quick and blunt (INT) \n\t - or did you soften the blow with reassurances and sympathies (CON)?",
-            "options": ["INT", "CON"]
+            "question": "You were about to deliver bad news. It would break their heart.",
+            "question_options": {
+                "INT": "Were you quick and blunt (INT)",
+                "CON": "Did you soften the blow with reassurances and sympathies (CON)"
+            },
+            "answer_options": ["INT", "CON"]
         },
         {
-            "question": "Did you let him hug you? \n\t - Yes (CHA) \n\t - or No (WIS).",
-            "options": ["CHA", "WIS"]
+            "question": "Did you let him hug you?",
+            "question_options": {
+                "CHA": "Yes (CHA)",
+                "WIS": "No (WIS)"
+            },
+            "answer_options": ["CHA", "WIS"]
         }
     ],
     [
         {
-            "question": "Well, you messed up this time. They're gone. And with it, all the opportunities you once looked forward to. \n\t - Did you chase after them (STR) \n\t - or accept the loss and move on (CON)?",
-            "options": ["STR", "CON"]
+            "question": "Well, you messed up this time. They're gone. And with it, all the opportunities you once looked forward to.",
+            "question_options": {
+                "STR": "Did you chase after them (STR)",
+                "CON": "Accept the loss and move on (CON)"
+            },
+            "answer_options": ["STR", "CON"]
         },
         {
-            "question": "Your friend was in an argument, and making some bold assertions. However, you knew she was wrong. Did you stand up for her? \n\t - Yes (CHA) \n\t - or no (DEX)?",
-            "options": ["CHA", "DEX"]
+            "question": "Your friend was in an argument, and making some bold assertions. However, you knew she was wrong. Did you stand up for her?",
+            "question_options": {
+                "CHA": "Yes (CHA)",
+                "DEX": "No (DEX)"
+            },
+            "answer_options": ["CHA", "DEX"]
         },
         {
-            "question": "\t - Did you divide the food equally (INT) \n\t - or give the hungrier ones a little bit more (WIS)?",
-            "options": ["INT", "WIS"]
+            "question": "",
+            "question_options": {
+                "INT": "Did you divide the food equally (INT)",
+                "WIS": "Give the hungrier ones a little bit more (WIS)"
+            },
+            "answer_options": ["INT", "WIS"]
         }
     ],
     [
         {
-            "question": "When you were insulted, \n\t - did your honor demand satisfaction (STR) \n\t - or did you just quietly promise eventual vengeance (INT)?",
-            "options": ["STR", "INT"]
+            "question": "When you were insulted...",
+            "question_options": {
+                "STR": "Did your honor demand satisfaction (STR)",
+                "INT": "Did you just quietly promise eventual vengeance (INT)?"
+            },
+            "answer_options": ["STR", "INT"]
         },
         {
-            "question": "It was none of your business, really. But it looked like things were escalating, and somebody might get hurt. \n\t - Did you meddle in the affairs of others (WIS) \n\t - or stay out of it (DEX)?",
-            "options": ["WIS", "DEX"]
+            "question": "It was none of your business, really. But it looked like things were escalating, and somebody might get hurt.",
+            "question_options": {
+                "WIS": "Did you meddle in the affairs of others (WIS)",
+                "DEX": "Stay out of it (DEX)"
+            },
+            "answer_options": ["WIS", "DEX"]
         },
         {
-            "question": "You lost. They were all laughing at you. \n\t - Did you offer your congratulations and walk away (CON) \n\t - or challenge them to a rematch (CHA)?",
-            "options": ["CON", "CHA"]
+            "question": "You lost. They were all laughing at you.",
+            "question_options": {
+                "CON": "Did you offer your congratulations and walk away (CON)",
+                "CHA": "Challenge them to a rematch (CHA)"
+            },
+            "answer_options": ["CON", "CHA"]
         }
     ],
     [
         {
-            "question": "It was supposed to be here by now, but it wasn't. People were getting worried. \n\t - Did you go out yourself to fetch it (STR) \n\t - or trust that it would arrive, and urge others to do the same (WIS)?",
-            "options": ["STR", "WIS"]
+            "question": "It was supposed to be here by now, but it wasn't. People were getting worried.",
+            "question_options": {
+                "STR": "Did you go out yourself to fetch it (STR)",
+                "WIS": "Trust that it would arrive, and urge others to do the same (WIS)"
+            },
+            "answer_options": ["STR", "WIS"]
         },
         {
-            "question": "You badly needed something that you couldn't afford. \n\t - Did you steal it (DEX) \n\t - or resolve to save up the money, no matter how long it took (CON)?",
-            "options": ["DEX", "CON"]
+            "question": "You badly needed something that you couldn't afford.",
+            "question_options": {
+                "DEX": "Did you steal it (DEX)",
+                "CON": "Resolve to save up the money, no matter how long it took (CON)"
+            },
+            "answer_options": ["DEX", "CON"]
         },
         {
-            "question": "Since it was so important, \n\t - did you talk to them in person (CHA) \n\t - or write a carefully-written letter, being sure to include all the details (INT)?",
-            "options": ["CHA", "INT"]
+            "question": "Since it was so important...",
+            "question_options": {
+                "CHA": "Did you talk to them in person (CHA)",
+                "INT": "Write a carefully-written letter, being sure to include all the details (INT)"
+            },
+            "answer_options": ["CHA", "INT"]
         }
     ],
     [
         {
-            "question": "\t - Did you choose love (CHA) \n\t - or career (STR)?",
-            "options": ["CHA", "STR"]
+            "question": "",
+            "question_options": {
+                "CHA": "Did you choose love (CHA)",
+                "STR": "Career (STR)"
+            },
+            "answer_options": ["CHA", "STR"]
         },
         {
-            "question": "This was taking longer than you thought. \n\t - Did you ask for help (DEX) \n\t - or try to find a more efficient way of doing it (INT)?",
-            "options": ["DEX", "INT"]
+            "question": "This was taking longer than you thought.",
+            "question_options": {
+                "DEX": "Did you ask for help (DEX)",
+                "INT": "Try to find a more efficient way of doing it (INT)"
+            },
+            "answer_options": ["DEX", "INT"]
         },
         {
-            "question": "The bastard had it coming. The only thing is, he didn't do the thing he's accused of. You did. \n\t - Did you step up and take your punishment (WIS) \n\t - or remain silent and watch karma descend (CON).",
-            "options": ["WIS", "CON"]
+            "question": "The bastard had it coming. The only thing is, he didn't do the thing he's accused of. You did.",
+            "question_options": {
+                "WIS": "Did you step up and take your punishment (WIS)",
+                "CON": "Remain silent and watch karma descend (CON)"
+            },
+            "answer_options": ["WIS", "CON"]
         }
     ]
 ]
 
-PROFESSIONS = [
-    {
+NUM_ADULTHOOD_BACKSTORY_EVENTS = 6
+
+PROFESSION_NAMES = [
+    "Army",
+    "Clergy",
+    "Criminal",
+    "Forest",
+    "Noble",
+    "Rural",
+    "Town",
+    "Wizard's Apprentice"
+]
+
+PROFESSIONS = {
+    "Army": {
         "profession": "Army",
-        "hint": "(Useful: Str, Dex, and Con)",
+        "hint": "(Useful: STR, DEX, and CON)",
         "scenarios": [
             {
-                "explanation": "Your training was more difficult than most. Test Str to influence Dex.",
-                "tested_ability": "Str",
-                "influenced_ability": "Dex"
+                "scenario": "Your training was more difficult than most. Test STR to influence DEX.",
+                "tested_ability": "STR",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Assigned to carry the heaviest load. Test Str to influence Con.",
-                "tested_ability": "Str",
-                "influenced_ability": "Con"
+                "scenario": "Assigned to carry the heaviest load. Test STR to influence CON.",
+                "tested_ability": "STR",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "The commander asked to see a test of your marksmanship. Test Dex to influence Str.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Str"
+                "scenario": "The commander asked to see a test of your marksmanship. Test DEX to influence STR.",
+                "tested_ability": "DEX",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Fled a losing battle. Test Dex to influence Con.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Con"
+                "scenario": "Fled a losing battle. Test DEX to influence CON.",
+                "tested_ability": "DEX",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Sustained a major injury. Test Con to influence Str.",
-                "tested_ability": "Con",
-                "influenced_ability": "Str"
+                "scenario": "Sustained a major injury. Test CON to influence STR.",
+                "tested_ability": "CON",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Captured. Test Con to influence Dex.",
-                "tested_ability": "Con",
-                "influenced_ability": "Dex"
+                "scenario": "Captured. Test CON to influence DEX.",
+                "tested_ability": "CON",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Considered for officer training. Test Str to influence Int.",
-                "tested_ability": "Str",
-                "influenced_ability": "Int"
+                "scenario": "Considered for officer training. Test STR to influence INT.",
+                "tested_ability": "STR",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Fellow scouting party depended on you. Test Dex to influence Cha.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Cha"
+                "scenario": "Fellow scouting party depended on you. Test DEX to influence CHA.",
+                "tested_ability": "DEX",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Starving and forced to forage for your own food. Test Con to influence Wis.",
-                "tested_ability": "Con",
-                "influenced_ability": "Wis"
+                "scenario": "Starving and forced to forage for your own food. Test CON to influence WIS.",
+                "tested_ability": "CON",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Tried a risky tactic involving stealth. Test Int to influence Dex.",
-                "tested_ability": "Int",
-                "influenced_ability": "Dex"
+                "scenario": "Tried a risky tactic involving stealth. Test INT to influence DEX.",
+                "tested_ability": "INT",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Walked into an ambush. Test Wis to influence Str.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Str"
+                "scenario": "Walked into an ambush. Test WIS to influence STR.",
+                "tested_ability": "WIS",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Attempted to befriend the cook. Test Cha to influence Con.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Con"
+                "scenario": "Attempted to befriend the cook. Test CHA to influence CON.",
+                "tested_ability": "CHA",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Hung out in the officer's club. Learn Military.",
+                "scenario": "Hung out in the officer's club. Learn Military.",
                 "learned_skill": "Military"
             },
             {
-                "explanation": "Worked with the supply train and logistics. Learn Roads.",
+                "scenario": "Worked with the supply train and logistics. Learn Roads.",
                 "learned_skill": "Roads"
             },
             {
-                "explanation": "Worked with weapon salvage and repair. Learn Blacksmithing.",
+                "scenario": "Worked with weapon salvage and repair. Learn Blacksmithing.",
                 "learned_skill": "Blacksmithing"
             },
             {
-                "explanation": "Always kept your weapons in immaculate condition. Learn Weapons.",
+                "scenario": "Always kept your weapons in immaculate condition. Learn Weapons.",
                 "learned_skill": "Weapons"
             },
             {
-                "explanation": "Learned the symbols and flags for all sorts of armies. Learn Heraldry.",
+                "scenario": "Learned the symbols and flags for all sorts of armies. Learn Heraldry.",
                 "learned_skill": "Heraldry"
             },
             {
-                "explanation": "Prepared food for your companions. Learn Cooking.",
+                "scenario": "Prepared food for your companions. Learn Cooking.",
                 "learned_skill": "Cooking"
             },
             {
-                "explanation": "Assigned as a bodyguard. Learn Random.",
+                "scenario": "Assigned as a bodyguard. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Spy in an enemy country. Learn Random.",
+                "scenario": "Spy in an enemy country. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Spent time guarding your home, away from the front lines. Learn Random.",
+                "scenario": "Spent time guarding your home, away from the front lines. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Had a little business on the side. Learn Random.",
+                "scenario": "Had a little business on the side. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Learned something from a prisoner. Learn Random.",
+                "scenario": "Learned something from a prisoner. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Fought something unusual, or in an unusual circumstance. Learn Random.",
+                "scenario": "Fought something unusual, or in an unusual circumstance. Learn Random.",
                 "learned_skill": "Random"
             }
         ]
     },
-    {
+    "Clergy": {
         "profession": "Clergy",
-        "hint": "(Useful: Int, Wis, and Cha)",
+        "hint": "(Useful: INT, WIS, and CHA)",
         "scenarios": [
             {
-                "explanation": "Recited scripture from memory to an audience. Test Int to influence Wis.",
-                "tested_ability": "Int",
-                "influenced_ability": "Wis"
+                "scenario": "Recited scripture from memory to an audience. Test INT to influence WIS.",
+                "tested_ability": "INT",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Taught the doctrine to the neophytes. Test Int to influence Cha.",
-                "tested_ability": "Int",
-                "influenced_ability": "Cha"
+                "scenario": "Taught the doctrine to the neophytes. Test INT to influence CHA.",
+                "tested_ability": "INT",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Debated your faith with the infidels. Test Wis to influence Int.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Int"
+                "scenario": "Debated your faith with the infidels. Test WIS to influence INT.",
+                "tested_ability": "WIS",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "A tragedy shook your faith. Test Wis to influence Cha.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Cha"
+                "scenario": "A tragedy shook your faith. Test WIS to influence CHA.",
+                "tested_ability": "WIS",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Had a great/horrible relationship with your mentor. Test Cha to influence Int.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Int"
+                "scenario": "Had a great/horrible relationship with your mentor. Test CHA to influence INT.",
+                "tested_ability": "CHA",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Received a visitation from your god. Test Cha to influence Wis.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Wis"
+                "scenario": "Received a visitation from your god. Test CHA to influence WIS.",
+                "tested_ability": "CHA",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Responsible for calling the faithful to their daily prayer. Test Int to influence Dex.",
-                "tested_ability": "Int",
-                "influenced_ability": "Dex"
+                "scenario": "Responsible for calling the faithful to their daily prayer. Test INT to influence DEX.",
+                "tested_ability": "INT",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Attempted a great labor for your god. You worked until collapse. Test Wis to influence Con.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Con"
+                "scenario": "Attempted a great labor for your god. You worked until collapse. Test WIS to influence CON.",
+                "tested_ability": "WIS",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "You often carried and prepared the bodies before the funeral. Test Cha to influence Str.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Str"
+                "scenario": "You often carried and prepared the bodies before the funeral. Test CHA to influence STR.",
+                "tested_ability": "CHA",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Traveled to study with a distant branch of your faith. Test Con to influence Int.",
-                "tested_ability": "Con",
-                "influenced_ability": "Int"
+                "scenario": "Traveled to study with a distant branch of your faith. Test CON to influence INT.",
+                "tested_ability": "CON",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "You helped build/repair a church/holy site. Test Str to influence Wis.",
-                "tested_ability": "Str",
-                "influenced_ability": "Wis"
+                "scenario": "You helped build/repair a church/holy site. Test STR to influence WIS.",
+                "tested_ability": "STR",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Tried to avert disaster during a wedding/baptism. Test Dex to influence Cha.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Cha"
+                "scenario": "Tried to avert disaster during a wedding/baptism. Test DEX to influence CHA.",
+                "tested_ability": "DEX",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Trained to overcome the evil that lurks in the world. Learn Demons.",
+                "scenario": "Trained to overcome the evil that lurks in the world. Learn Demons.",
                 "learned_skill": "Demons"
             },
             {
-                "explanation": "Your church/temple is historically significant. Learn History.",
+                "scenario": "Your church/temple is historically significant. Learn History.",
                 "learned_skill": "History"
             },
             {
-                "explanation": "Once a servant of the Forest God. Learn Religion (Forest God).",
+                "scenario": "Once a servant of the Forest God. Learn Religion (Forest God).",
                 "learned_skill": "Religion (Forest God)"
             },
             {
-                "explanation": "Once a servant of the Moon God. Learn Religion (Moon God).",
+                "scenario": "Once a servant of the Moon God. Learn Religion (Moon God).",
                 "learned_skill": "Religion (Moon God)"
             },
             {
-                "explanation": "Once a servant of the Ocean God. Learn Religion (Ocean God).",
+                "scenario": "Once a servant of the Ocean God. Learn Religion (Ocean God).",
                 "learned_skill": "Religion (Ocean God)"
             },
             {
-                "explanation": "Once a servant of the Sun God. Learn Religion (Sun God).",
+                "scenario": "Once a servant of the Sun God. Learn Religion (Sun God).",
                 "learned_skill": "Religion (Sun God)"
             },
             {
-                "explanation": "Your life was different before you committed yourself to your god. Learn Random.",
+                "scenario": "Your life was different before you committed yourself to your god. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Your church/temple is famous for something. Learn Random.",
+                "scenario": "Your church/temple is famous for something. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "A vision of your god imbued you with knowledge. Learn Random.",
+                "scenario": "A vision of your god imbued you with knowledge. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You were required to learn a certain skill before you began your education. Learn Random.",
+                "scenario": "You were required to learn a certain skill before you began your education. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You've traveled far preaching the doctrine of your god. Learn Random.",
+                "scenario": "You've traveled far preaching the doctrine of your god. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "While living with heathens, you learned some of their ways. Learn Random.",
+                "scenario": "While living with heathens, you learned some of their ways. Learn Random.",
                 "learned_skill": "Random"
             }
         ]
     },
-    {
+    "Criminal": {
         "profession": "Criminal",
-        "hint": "(Useful: Str, Dex, and Cha)",
+        "hint": "(Useful: STR, DEX, and CHA)",
         "scenarios": [
             {
-                "explanation": "The boss asked you to crack a lot of skulls. Test Str to influence Dex.",
-                "tested_ability": "Str",
-                "influenced_ability": "Dex"
+                "scenario": "The boss asked you to crack a lot of skulls. Test STR to influence DEX.",
+                "tested_ability": "STR",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "You survived your initiation in a dramatic fashion. Test Str to influence Cha.",
-                "tested_ability": "Str",
-                "influenced_ability": "Cha"
+                "scenario": "You survived your initiation in a dramatic fashion. Test STR to influence CHA.",
+                "tested_ability": "STR",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "You'll never forget the first time you killed someone. Test Dex to influence Str.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Str"
+                "scenario": "You'll never forget the first time you killed someone. Test DEX to influence STR.",
+                "tested_ability": "DEX",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "The boss personally asked you to steal something important. Test Dex to influence Cha.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Cha"
+                "scenario": "The boss personally asked you to steal something important. Test DEX to influence CHA.",
+                "tested_ability": "DEX",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "You were tasked with killing a friend to prove your loyalty. Test Cha to influence Str.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Str"
+                "scenario": "You were tasked with killing a friend to prove your loyalty. Test CHA to influence STR.",
+                "tested_ability": "CHA",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "You had a complicated relationship with the people you extorted. Test Cha to influence Dex.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Dex"
+                "scenario": "You had a complicated relationship with the people you extorted. Test CHA to influence DEX.",
+                "tested_ability": "CHA",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Entered a lethal-force duel. Test Str to influence Wis.",
-                "tested_ability": "Str",
-                "influenced_ability": "Wis"
+                "scenario": "Entered a lethal-force duel. Test STR to influence WIS.",
+                "tested_ability": "STR",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Stole from a wizard. Test Dex to influence Int.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Int"
+                "scenario": "Stole from a wizard. Test DEX to influence INT.",
+                "tested_ability": "DEX",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Your “friendly” rival is a fan of poison. Test Cha to influence Con.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Con"
+                "scenario": "Your “friendly” rival is a fan of poison. Test CHA to influence CON.",
+                "tested_ability": "CHA",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Spent some time in prison. Test Con to influence Str.",
-                "tested_ability": "Con",
-                "influenced_ability": "Str"
+                "scenario": "Spent some time in prison. Test CON to influence STR.",
+                "tested_ability": "CON",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Had a mentor. Test Int to influence Dex.",
-                "tested_ability": "Int",
-                "influenced_ability": "Dex"
+                "scenario": "Had a mentor. Test INT to influence DEX.",
+                "tested_ability": "INT",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Made a lot of friends/enemies on that street. Test Wis to influence Cha.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Cha"
+                "scenario": "Made a lot of friends/enemies on that street. Test WIS to influence CHA.",
+                "tested_ability": "WIS",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Been to some intense parties. Learn Carouse.",
+                "scenario": "Been to some intense parties. Learn Carouse.",
                 "learned_skill": "Carouse"
             },
             {
-                "explanation": "Born into your family profession. Learn Criminals.",
+                "scenario": "Born into your family profession. Learn Criminals.",
                 "learned_skill": "Criminals"
             },
             {
-                "explanation": "Burgled quite a few houses. Learn Locks.",
+                "scenario": "Burgled quite a few houses. Learn Locks.",
                 "learned_skill": "Locks"
             },
             {
-                "explanation": "You know what money is for. Learn Gambling.",
+                "scenario": "You know what money is for. Learn Gambling.",
                 "learned_skill": "Gambling"
             },
             {
-                "explanation": "Strangers paid for most of your meals. Learn Pick Pocket.",
+                "scenario": "Strangers paid for most of your meals. Learn Pick Pocket.",
                 "learned_skill": "Pick Pocket"
             },
             {
-                "explanation": "You'll never forget that brothel. Learn Sex.",
+                "scenario": "You'll never forget that brothel. Learn Sex.",
                 "learned_skill": "Sex"
             },
             {
-                "explanation": "Crime is your business, but you have another passion. Learn Random.",
+                "scenario": "Crime is your business, but you have another passion. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "The boss had an interesting collection. Learn Random.",
+                "scenario": "The boss had an interesting collection. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You can never return to your old life. Learn Random.",
+                "scenario": "You can never return to your old life. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Had a little business on the side. Learn Random.",
+                "scenario": "Had a little business on the side. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Learned something in prison. Learn Random.",
+                "scenario": "Learned something in prison. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You stole something very unusual once. Learn Random.",
+                "scenario": "You stole something very unusual once. Learn Random.",
                 "learned_skill": "Random"
             }
         ]
     },
-    {
+    "Forest": {
         "profession": "Forest",
-        "hint": "(Useful: Str, Dex, and Wis)",
+        "hint": "(Useful: STR, DEX, and WIS)",
         "scenarios": [
             {
-                "explanation": "Fought off a beast with only a knife. Test Str to influence Dex.",
-                "tested_ability": "Str",
-                "influenced_ability": "Dex"
+                "scenario": "Fought off a beast with only a knife. Test STR to influence DEX.",
+                "tested_ability": "STR",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Unable to find your way home, you made a new home. Test Str to influence Wis.",
-                "tested_ability": "Str",
-                "influenced_ability": "Wis"
+                "scenario": "Unable to find your way home, you made a new home. Test STR to influence WIS.",
+                "tested_ability": "STR",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Trapped for days. You thought you were going to die. Test Dex to influence Str.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Str"
+                "scenario": "Trapped for days. You thought you were going to die. Test DEX to influence STR.",
+                "tested_ability": "DEX",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Encountered the elves. Test Dex to influence Wis.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Wis"
+                "scenario": "Encountered the elves. Test DEX to influence WIS.",
+                "tested_ability": "DEX",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Hunger made you weak. Test Wis to influence Str.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Str"
+                "scenario": "Hunger made you weak. Test WIS to influence STR.",
+                "tested_ability": "WIS",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Heard voices on the wind. Test Wis to influence Dex.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Dex"
+                "scenario": "Heard voices on the wind. Test WIS to influence DEX.",
+                "tested_ability": "WIS",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Trusted a stranger enough to share food with them. Test Str to influence Cha.",
-                "tested_ability": "Str",
-                "influenced_ability": "Cha"
+                "scenario": "Trusted a stranger enough to share food with them. Test STR to influence CHA.",
+                "tested_ability": "STR",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "You have been hunted. Test Dex to influence Con.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Con"
+                "scenario": "You have been hunted. Test DEX to influence CON.",
+                "tested_ability": "DEX",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Followed tracks that you didn't recognize. Test Wis to influence Int.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Int"
+                "scenario": "Followed tracks that you didn't recognize. Test WIS to influence INT.",
+                "tested_ability": "WIS",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Tracked down a human, and fought them. Test Int to influence Str.",
-                "tested_ability": "Int",
-                "influenced_ability": "Str"
+                "scenario": "Tracked down a human, and fought them. Test INT to influence STR.",
+                "tested_ability": "INT",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Encountered the fey. Test Cha to influence Wis.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Wis"
+                "scenario": "Encountered the fey. Test CHA to influence WIS.",
+                "tested_ability": "CHA",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Dysentery was awful. Test Con to influence Dex.",
-                "tested_ability": "Con",
-                "influenced_ability": "Dex"
+                "scenario": "Dysentery was awful. Test CON to influence DEX.",
+                "tested_ability": "CON",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Eyes are always turned skyward. Learn Weather.",
+                "scenario": "Eyes are always turned skyward. Learn Weather.",
                 "learned_skill": "Weather"
             },
             {
-                "explanation": "Flesh is food and food is strength. Learn Butcher.",
+                "scenario": "Flesh is food and food is strength. Learn Butcher.",
                 "learned_skill": "Butcher"
             },
             {
-                "explanation": "You are most comfortable here. Learn Forests.",
+                "scenario": "You are most comfortable here. Learn Forests.",
                 "learned_skill": "Forests"
             },
             {
-                "explanation": "Easier than hunting. Learn Fishing.",
+                "scenario": "Easier than hunting. Learn Fishing.",
                 "learned_skill": "Fishing"
             },
             {
-                "explanation": "You wander far. Learn Navigation.",
+                "scenario": "You wander far. Learn Navigation.",
                 "learned_skill": "Navigation"
             },
             {
-                "explanation": "Eyes are always turned to the ground. Learn Track.",
+                "scenario": "Eyes are always turned to the ground. Learn Track.",
                 "learned_skill": "Track"
             },
             {
-                "explanation": "Strange things are shared around a campfire. Learn Random.",
+                "scenario": "Strange things are shared around a campfire. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Born in the city. Learn Random.",
+                "scenario": "Born in the city. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "The real reason you go back to town. Learn Random.",
+                "scenario": "The real reason you go back to town. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "The real reason why you travel. Learn Random.",
+                "scenario": "The real reason why you travel. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You learned it from a wizard. Learn Random.",
+                "scenario": "You learned it from a wizard. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You learned it from the birds. Learn Random.",
+                "scenario": "You learned it from the birds. Learn Random.",
                 "learned_skill": "Random"
             }
         ]
     },
-    {
+    "Noble": {
         "profession": "Noble",
-        "hint": "(Useful: Dex, Int, and Cha)",
+        "hint": "(Useful: DEX, INT, and CHA)",
         "scenarios": [
             {
-                "explanation": "Attempted to read all of the books that you own. Test Dex to influence Int.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Int"
+                "scenario": "Attempted to read all of the books that you own. Test DEX to influence INT.",
+                "tested_ability": "DEX",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Seduced someone of a higher/lower social class. Test Dex to influence Cha.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Cha"
+                "scenario": "Seduced someone of a higher/lower social class. Test DEX to influence CHA.",
+                "tested_ability": "DEX",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Involved in blackmail. Test Int to influence Dex.",
-                "tested_ability": "Int",
-                "influenced_ability": "Dex"
+                "scenario": "Involved in blackmail. Test INT to influence DEX.",
+                "tested_ability": "INT",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Aspirations to wear the crown. Test Int to influence Cha.",
-                "tested_ability": "Int",
-                "influenced_ability": "Cha"
+                "scenario": "Aspirations to wear the crown. Test INT to influence CHA.",
+                "tested_ability": "INT",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Involved in a scandalous relationship. Test Cha to influence Dex.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Dex"
+                "scenario": "Involved in a scandalous relationship. Test CHA to influence DEX.",
+                "tested_ability": "CHA",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Lied to your tutor (that old fool). Test Cha to influence Int.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Cha"
+                "scenario": "Lied to your tutor (that old fool). Test CHA to influence INT.",
+                "tested_ability": "CHA",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "You love/hate practicing with your swordmaster. Test Dex to influence Con.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Con"
+                "scenario": "You love/hate practicing with your swordmaster. Test DEX to influence CON.",
+                "tested_ability": "DEX",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Once saw a demon summoned at a party. Test Int to influence Wis.",
-                "tested_ability": "Int",
-                "influenced_ability": "Wis"
+                "scenario": "Once saw a demon summoned at a party. Test INT to influence WIS.",
+                "tested_ability": "INT",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Tried to avoid actual combat in the war. Test Cha to influence Str.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Str"
+                "scenario": "Tried to avoid actual combat in the war. Test CHA to influence STR.",
+                "tested_ability": "CHA",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Member of an archery/polo/yacht club. Test Con to influence Dex.",
-                "tested_ability": "Con",
-                "influenced_ability": "Dex"
+                "scenario": "Member of an archery/polo/yacht club. Test CON to influence DEX.",
+                "tested_ability": "CON",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Member of (mostly social, somewhat strange) secret society. Test Str to influence Int.",
-                "tested_ability": "Str",
-                "influenced_ability": "Int"
+                "scenario": "Member of (mostly social, somewhat strange) secret society. Test STR to influence INT.",
+                "tested_ability": "STR",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Manipulated with your own betrothal. Test Wis to influence Cha.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Cha"
+                "scenario": "Manipulated with your own betrothal. Test WIS to influence CHA.",
+                "tested_ability": "WIS",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Politeness opens many doors (but not as many as money). Learn Etiquette.",
+                "scenario": "Politeness opens many doors (but not as many as money). Learn Etiquette.",
                 "learned_skill": "Etiquette"
             },
             {
-                "explanation": "You are a fish among fish in a very expensive ocean. Learn Nobles.",
+                "scenario": "You are a fish among fish in a very expensive ocean. Learn Nobles.",
                 "learned_skill": "Nobles"
             },
             {
-                "explanation": "Form before function. Learn Fashion.",
+                "scenario": "Form before function. Learn Fashion.",
                 "learned_skill": "Fashion"
             },
             {
-                "explanation": "You do your own wealth, and want more. Learn Money.",
+                "scenario": "You do your own wealth, and want more. Learn Money.",
                 "learned_skill": "Money"
             },
             {
-                "explanation": "Everything else is boring. Learn Drugs.",
+                "scenario": "Everything else is boring. Learn Drugs.",
                 "learned_skill": "Drugs"
             },
             {
-                "explanation": "Your notebook is always close at hand, should inspiration strike. Learn Poetry.",
+                "scenario": "Your notebook is always close at hand, should inspiration strike. Learn Poetry.",
                 "learned_skill": "Poetry"
             },
             {
-                "explanation": "You've been to some strange parties. Learn Random.",
+                "scenario": "You've been to some strange parties. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "No one suspects what really goes on inside your private social club. Learn Random.",
+                "scenario": "No one suspects what really goes on inside your private social club. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You've cultivated a hobby to make yourself seem interesting. You loathe it. Learn Random.",
+                "scenario": "You've cultivated a hobby to make yourself seem interesting. You loathe it. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You've traveled to some distant shores. They were boring, too. Learn Random.",
+                "scenario": "You've traveled to some distant shores. They were boring, too. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "An exotic visitor lived in your house for a good length of time. Learn Random.",
+                "scenario": "An exotic visitor lived in your house for a good length of time. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Only one thing keeps you sane. Learn Random.",
+                "scenario": "Only one thing keeps you sane. Learn Random.",
                 "learned_skill": "Random"
             }
         ]
     },
-    {
+    "Rural": {
         "profession": "Rural",
-        "hint": "(Useful: Str, Con, and Wis)",
+        "hint": "(Useful: STR, CON, and WIS)",
         "scenarios": [
             {
-                "explanation": "Abundant crops means exhausting harvests. Test Str to influence Con.",
-                "tested_ability": "Str",
-                "influenced_ability": "Con"
+                "scenario": "Abundant crops means exhausting harvests. Test STR to influence CON.",
+                "tested_ability": "STR",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "After that day, you were the only one left to take care of the farm. Test Str to influence Wis.",
-                "tested_ability": "Str",
-                "influenced_ability": "Wis"
+                "scenario": "After that day, you were the only one left to take care of the farm. Test STR to influence WIS.",
+                "tested_ability": "STR",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Famine. Test Con to influence Str.",
-                "tested_ability": "Con",
-                "influenced_ability": "Str"
+                "scenario": "Famine. Test CON to influence STR.",
+                "tested_ability": "CON",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Drank too much mead at a festival. Test Con to influence Wis.",
-                "tested_ability": "Con",
-                "influenced_ability": "Wis"
+                "scenario": "Drank too much mead at a festival. Test CON to influence WIS.",
+                "tested_ability": "CON",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Entered your crops/animals in a county fair. Test Wis to influence Str.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Str"
+                "scenario": "Entered your crops/animals in a county fair. Test WIS to influence STR.",
+                "tested_ability": "WIS",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Oversaw a birth in the absence of anyone more qualified. Test Wis to influence Con.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Con"
+                "scenario": "Oversaw a birth in the absence of anyone more qualified. Test WIS to influence CON.",
+                "tested_ability": "WIS",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Once carried an animal/person a great distance in an emergency. Test Str to influence Cha.",
-                "tested_ability": "Str",
-                "influenced_ability": "Cha"
+                "scenario": "Once carried an animal/person a great distance in an emergency. Test STR to influence CHA.",
+                "tested_ability": "STR",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Caught the plague. Test Con to influence Dex.",
-                "tested_ability": "Con",
-                "influenced_ability": "Dex"
+                "scenario": "Caught the plague. Test CON to influence DEX.",
+                "tested_ability": "CON",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Buried your own parents behind the farm. Test Wis to influence Int.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Int"
+                "scenario": "Buried your own parents behind the farm. Test WIS to influence INT.",
+                "tested_ability": "WIS",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Forced to improvise when a disease ravaged your crops. Test Int to influence Con.",
-                "tested_ability": "Int",
-                "influenced_ability": "Con"
+                "scenario": "Forced to improvise when a disease ravaged your crops. Test INT to influence CON.",
+                "tested_ability": "INT",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Got married. Test Cha to influence Wis.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Wis"
+                "scenario": "Got married. Test CHA to influence WIS.",
+                "tested_ability": "CHA",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Ran for your life. Test Dex to influence Str.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Str"
+                "scenario": "Ran for your life. Test DEX to influence STR.",
+                "tested_ability": "DEX",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Your pig trusts you. Learn Animal Handling.",
+                "scenario": "Your pig trusts you. Learn Animal Handling.",
                 "learned_skill": "Animal Handling"
             },
             {
-                "explanation": "And your ancestors are farmers, too. As far back as anyone remembers. Learn Farming.",
+                "scenario": "And your ancestors are farmers, too. As far back as anyone remembers. Learn Farming.",
                 "learned_skill": "Farming"
             },
             {
-                "explanation": "You have a passion for equines. Learn Horses.",
+                "scenario": "You have a passion for equines. Learn Horses.",
                 "learned_skill": "Horses"
             },
             {
-                "explanation": "About 10% of your waking hours are spent talking about the weather. Learn Weather.",
+                "scenario": "About 10% of your waking hours are spent talking about the weather. Learn Weather.",
                 "learned_skill": "Weather"
             },
             {
-                "explanation": "You might be an alcoholic. Learn Booze.",
+                "scenario": "You might be an alcoholic. Learn Booze.",
                 "learned_skill": "Booze"
             },
             {
-                "explanation": "The well-to-do men who buy your crops are not strangers. Learn Merchants.",
+                "scenario": "The well-to-do men who buy your crops are not strangers. Learn Merchants.",
                 "learned_skill": "Merchants"
             },
             {
-                "explanation": "You read a book once. Learn Random.",
+                "scenario": "You read a book once. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You and your friends have a tradition you all do on festival days. Learn Random.",
+                "scenario": "You and your friends have a tradition you all do on festival days. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You're pretty sure that this is what you learned in church. Learn Random.",
+                "scenario": "You're pretty sure that this is what you learned in church. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "One of your siblings gave up farming. They visit sometimes. Learn Random.",
+                "scenario": "One of your siblings gave up farming. They visit sometimes. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Aspirations of a better life. Learn Random.",
+                "scenario": "Aspirations of a better life. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You've been talking to caravan guards too much. Learn Random.",
+                "scenario": "You've been talking to caravan guards too much. Learn Random.",
                 "learned_skill": "Random"
             }
         ]
     },
-    {
+    "Town": {
         "profession": "Town",
-        "hint": "(Useful: Con, Int, and Cha)",
+        "hint": "(Useful: CON, INT, and CHA)",
         "scenarios": [
             {
-                "explanation": "Apprenticeship was not what you expected. Test Con to influence Int.",
-                "tested_ability": "Con",
-                "influenced_ability": "Int"
+                "scenario": "Apprenticeship was not what you expected. Test CON to influence INT.",
+                "tested_ability": "CON",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Survived the slow pox. Not everyone did. Test Con to influence Cha.",
-                "tested_ability": "Con",
-                "influenced_ability": "Cha"
+                "scenario": "Survived the slow pox. Not everyone did. Test CON to influence CHA.",
+                "tested_ability": "CON",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Noticed a discrepancy in your finances. Test Int to influence Con.",
-                "tested_ability": "Int",
-                "influenced_ability": "Con"
+                "scenario": "Noticed a discrepancy in your finances. Test INT to influence CON.",
+                "tested_ability": "INT",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Helped look for a missing child. Test Int to influence Cha.",
-                "tested_ability": "Int",
-                "influenced_ability": "Cha"
+                "scenario": "Helped look for a missing child. Test INT to influence CHA.",
+                "tested_ability": "INT",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "Called for help while being mugged. Test Cha to influence Con.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Con"
+                "scenario": "Called for help while being mugged. Test CHA to influence CON.",
+                "tested_ability": "CHA",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Ran for a position in your guild. Test Cha to influence Int.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Int"
+                "scenario": "Ran for a position in your guild. Test CHA to influence INT.",
+                "tested_ability": "CHA",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Something strange happened while you were working late one night. Test Con to influence Dex.",
-                "tested_ability": "Con",
-                "influenced_ability": "Dex"
+                "scenario": "Something strange happened while you were working late one night. Test CON to influence DEX.",
+                "tested_ability": "CON",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Helped hunt for a witch. Test Int to influence Wis.",
-                "tested_ability": "Int",
-                "influenced_ability": "Wis"
+                "scenario": "Helped hunt for a witch. Test INT to influence WIS.",
+                "tested_ability": "INT",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Epic bar brawl. You still owe money for damages. Test Cha to influence Str.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Str"
+                "scenario": "Epic bar brawl. You still owe money for damages. Test CHA to influence STR.",
+                "tested_ability": "CHA",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Trampled by a mob. Test Dex to influence Con.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Con"
+                "scenario": "Trampled by a mob. Test DEX to influence CON.",
+                "tested_ability": "DEX",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Abused by a noble's thugs. Test Str to influence Int.",
-                "tested_ability": "Str",
-                "influenced_ability": "Int"
+                "scenario": "Abused by a noble's thugs. Test STR to influence INT.",
+                "tested_ability": "STR",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "They tried to cheat you. Test Wis to influence Cha.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Cha"
+                "scenario": "They tried to cheat you. Test WIS to influence CHA.",
+                "tested_ability": "WIS",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "You forged your own weapon. Learn Blacksmithing.",
+                "scenario": "You forged your own weapon. Learn Blacksmithing.",
                 "learned_skill": "Blacksmithing"
             },
             {
-                "explanation": "Built all the furniture in your house. Learn Carpentry.",
+                "scenario": "Built all the furniture in your house. Learn Carpentry.",
                 "learned_skill": "Carpentry"
             },
             {
-                "explanation": "You have fed hungry mouths. Learn Cooking.",
+                "scenario": "You have fed hungry mouths. Learn Cooking.",
                 "learned_skill": "Cooking"
             },
             {
-                "explanation": "A regular at the tavern. Learn Gossip.",
+                "scenario": "A regular at the tavern. Learn Gossip.",
                 "learned_skill": "Gossip"
             },
             {
-                "explanation": "A fountain of good humor among your friends. Learn Comedy.",
+                "scenario": "A fountain of good humor among your friends. Learn Comedy.",
                 "learned_skill": "Comedy"
             },
             {
-                "explanation": "Like most, you've struggled with taxes, permits, and passes. Learn Bureaucracy.",
+                "scenario": "Like most, you've struggled with taxes, permits, and passes. Learn Bureaucracy.",
                 "learned_skill": "Bureaucracy"
             },
             {
-                "explanation": "No one knows about your secret. Learn Random.",
+                "scenario": "No one knows about your secret. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "A little business on the side. Learn Random.",
+                "scenario": "A little business on the side. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "A remnant of your meager education. Learn Random.",
+                "scenario": "A remnant of your meager education. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "A reminder of that one time you traveled somewhere. Learn Random.",
+                "scenario": "A reminder of that one time you traveled somewhere. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Your family is known for it. Learn Random.",
+                "scenario": "Your family is known for it. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You weren't born here. You can still remember your former life vividly. Learn Random.",
+                "scenario": "You weren't born here. You can still remember your former life vividly. Learn Random.",
                 "learned_skill": "Random"
             }
         ]
     },
-    {
+    "Wizard's Apprentice": {
         "profession": "Wizard's Apprentice",
-        "hint": "(Useful: Dex, Int, and Wis)",
+        "hint": "(Useful: DEX, INT, and WIS)",
         "scenarios": [
             {
-                "explanation": "Endless hours of scribing text. Test Dex to influence Int.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Int"
+                "scenario": "Endless hours of scribing text. Test DEX to influence INT.",
+                "tested_ability": "DEX",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Had to improvise when something didn't go as planned. Test Dex to influence Wis.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Wis"
+                "scenario": "Had to improvise when something didn't go as planned. Test DEX to influence WIS.",
+                "tested_ability": "DEX",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Tried to cast a spell in an emergency. Test Int to influence Dex.",
-                "tested_ability": "Int",
-                "influenced_ability": "Dex"
+                "scenario": "Tried to cast a spell in an emergency. Test INT to influence DEX.",
+                "tested_ability": "INT",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Tried to cast a spell that you had not been taught. Test Int to influence Wis.",
-                "tested_ability": "Int",
-                "influenced_ability": "Wis"
+                "scenario": "Tried to cast a spell that you had not been taught. Test INT to influence WIS.",
+                "tested_ability": "INT",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Body was temporarily possessed by otherworldly powers. Test Wis to influence Dex.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Dex"
+                "scenario": "Body was temporarily possessed by otherworldly powers. Test WIS to influence DEX.",
+                "tested_ability": "WIS",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "Tried to save your master's life. Test Wis to influence Int.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Int"
+                "scenario": "Tried to save your master's life. Test WIS to influence INT.",
+                "tested_ability": "WIS",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "In charge of wrangling your master's magical beasts. Test Dex to influence Str.",
-                "tested_ability": "Dex",
-                "influenced_ability": "Str"
+                "scenario": "In charge of wrangling your master's magical beasts. Test DEX to influence STR.",
+                "tested_ability": "DEX",
+                "influenced_ability": "STR"
             },
             {
-                "explanation": "Neglected your studies in order to socialize. Test Int to influence Cha.",
-                "tested_ability": "Int",
-                "influenced_ability": "Cha"
+                "scenario": "Neglected your studies in order to socialize. Test INT to influence CHA.",
+                "tested_ability": "INT",
+                "influenced_ability": "CHA"
             },
             {
-                "explanation": "You tried the weird drugs. Test Wis to influence Con.",
-                "tested_ability": "Wis",
-                "influenced_ability": "Con"
+                "scenario": "You tried the weird drugs. Test WIS to influence CON.",
+                "tested_ability": "WIS",
+                "influenced_ability": "CON"
             },
             {
-                "explanation": "Endless hours of meditation. Test Con to influence Int.",
-                "tested_ability": "Con",
-                "influenced_ability": "Int"
+                "scenario": "Endless hours of meditation. Test CON to influence INT.",
+                "tested_ability": "CON",
+                "influenced_ability": "INT"
             },
             {
-                "explanation": "Communicated with a vast and inhuman intelligence. Test Cha to influence Wis.",
-                "tested_ability": "Cha",
-                "influenced_ability": "Wis"
+                "scenario": "Communicated with a vast and inhuman intelligence. Test CHA to influence WIS.",
+                "tested_ability": "CHA",
+                "influenced_ability": "WIS"
             },
             {
-                "explanation": "Mopped up after messy experiments. Test Str to influence Dex.",
-                "tested_ability": "Str",
-                "influenced_ability": "Dex"
+                "scenario": "Mopped up after messy experiments. Test STR to influence DEX.",
+                "tested_ability": "STR",
+                "influenced_ability": "DEX"
             },
             {
-                "explanation": "You master had access to an incredible observatory. Learn Astronomy.",
+                "scenario": "You master had access to an incredible observatory. Learn Astronomy.",
                 "learned_skill": "Astronomy"
             },
             {
-                "explanation": "Studied briefly among elves. Learn Elves.",
+                "scenario": "Studied briefly among elves. Learn Elves.",
                 "learned_skill": "Elves"
             },
             {
-                "explanation": "Studied from ancient books written in unusual languages. Learn Linguistics.",
+                "scenario": "Studied from ancient books written in unusual languages. Learn Linguistics.",
                 "learned_skill": "Linguistics"
             },
             {
-                "explanation": "Your master had access to an incredible library. Learn Literature.",
+                "scenario": "Your master had access to an incredible library. Learn Literature.",
                 "learned_skill": "Literature"
             },
             {
-                "explanation": "Your master had access to an magnificent alchemy lab. Learn Alchemy.",
+                "scenario": "Your master had access to an magnificent alchemy lab. Learn Alchemy.",
                 "learned_skill": "Alchemy"
             },
             {
-                "explanation": "Socialized with a certain group of wizards. Learn Wizards.",
+                "scenario": "Socialized with a certain group of wizards. Learn Wizards.",
                 "learned_skill": "Wizards"
             },
             {
-                "explanation": "Traveled to a distant place with your master. Learn Random.",
+                "scenario": "Traveled to a distant place with your master. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Forced to learn strange skills before being allowed to learn magic. Learn Random.",
+                "scenario": "Forced to learn strange skills before being allowed to learn magic. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "You learned magic through a very unorthodox method.. Learn Random.",
+                "scenario": "You learned magic through a very unorthodox method.. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Your master had eclectic interests. Learn Random.",
+                "scenario": "Your master had eclectic interests. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Learned something from another apprentice. Learn Random.",
+                "scenario": "Learned something from another apprentice. Learn Random.",
                 "learned_skill": "Random"
             },
             {
-                "explanation": "Still remember what you learned before becoming an apprentice. Learn Random.",
+                "scenario": "Still remember what you learned before becoming an apprentice. Learn Random.",
                 "learned_skill": "Random"
             }
         ]
     }
-]
+}
 
 RANDOM_SKILLS = [
     "Alchemy", "Animal Handling", "Architecture", "Astronomy", "Bureaucracy", "Beg", "Blacksmithing", "Booze", "Butcher", "Carpentry",
