@@ -45,6 +45,9 @@ class CharacterGeneratorBot():
     async def print(self, string):
         await self.interaction.followup.send(string)
 
+    async def printView(self, string, view = None):
+        await self.interaction.followup.send(string, view=view)
+
     async def printFile(self, file, message = ""):
         await self.interaction.followup.send(message, file=discord.File(file, filename=os.path.basename(file.name)))
 
@@ -54,21 +57,23 @@ class CharacterGeneratorBot():
         else:
             return message.user == self.interaction.user and message.channel == self.interaction.channel
 
+    async def presentAdulthoodIntroduction(self):
+        await self.print("\nNow finishing up with adulthood...")
+
     async def promptCharacterName(self):
         await self.interaction.response.send_message("What is your character's name?")
-        message = await self.bot.wait_for('message', check=self.isSameAuthorAndChannel)
-        return message.content
+        return await self.waitForAndValidateStringInput()
 
     async def promptChildhoodStatRoll(self, ability: str, backstory_event_options: list[ChildhoodBackstoryEvent]):
-        await self.interaction.followup.send('Roll a d12 for ' + ability + '.')
+        await self.print('Roll a d12 for ' + ability + '.')
 
         roll_result = await self.waitForAndValidateIntInput(1, 12)
         backstory_event = backstory_event_options[roll_result - 1]
-        await self.interaction.followup.send(backstory_event.lore)
+        await self.print(backstory_event.lore)
         return backstory_event
 
     async def promptAdolescenceBackstoryGroup(self, potential_backstory_options: list[AdolescenceBackstory]):
-        await self.interaction.followup.send("Now moving on to adolescence...\nRoll a d10 to determine your backstory path.")
+        await self.print("Now moving on to adolescence...\nRoll a d10 to determine your backstory path.")
 
         roll_result = await self.waitForAndValidateIntInput(1, 10)
         backstory_path = potential_backstory_options[math.floor((roll_result - 1) / 2)]
@@ -76,53 +81,53 @@ class CharacterGeneratorBot():
 
     async def promptAdolescenceBackstoryEvent(self, backstory_event: AdolescenceBackstoryEvent) -> list[AbilityScore]:
         view = AdolescenceEventAnswerSelectView(backstory_event)
-        await self.interaction.followup.send(backstory_event.question, view=view)
+        await self.printView(backstory_event.question, view)
 
         await view.wait()
 
         backstory_event.answer = view.select.backstory_event.answer
 
-        await self.interaction.followup.send("Now roll 2d6 to determine ability increases.\nWhat was the first roll?", ephemeral=True)
+        await self.print("Now roll 2d6 to determine ability increases.\nWhat was the first roll?")
         backstory_event.addRoll(await self.waitForAndValidateIntInput(1, 6))
-        await self.interaction.followup.send("What was the second roll?", ephemeral=True)
+        await self.print("What was the second roll?")
         backstory_event.addRoll(await self.waitForAndValidateIntInput(1, 6))
 
         return backstory_event
 
     async def promptAdulthoodProfessionChoice(self):
         view = AdulthoodProfessionSelectView()
-        await self.interaction.followup.send(view=view)
+        await self.printView("", view=view)
 
         await view.wait()
 
         return view.select.profession_choice
 
     async def promptAdulthoodEventRoll(self, potential_events) -> AdulthoodBackstoryEvent:
-        await self.interaction.followup.send("Roll a d24 (d2 + d12):")
+        await self.print("Roll a d24 (d2 + d12):")
         roll_result = await self.waitForAndValidateIntInput(1, 24)
         return potential_events[roll_result - 1]
 
     async def promptAbilityTest(self, scenario, tested_ability, tested_ability_score):
         # Need tested_ability score from character_sheet
-        await self.interaction.followup.send(f"{scenario} [{tested_ability} ({tested_ability_score})] (Roll a d12):")
+        await self.print(f"{scenario} [{tested_ability} ({tested_ability_score})] (Roll a d12):")
         roll_result = await self.waitForAndValidateIntInput(1, 12)
         test_result = roll_result <= tested_ability_score
         if test_result:
-            await self.interaction.followup.send("Success!")
+            await self.print("Success!")
         else:
-            await self.interaction.followup.send("Failure!")
+            await self.print("Failure!")
 
         return test_result
 
     async def promptRandomSkill(self, skill_options) -> str:
-        await self.interaction.followup.send("Roll a d100:")
+        await self.print("Roll a d100:")
         roll_result = await self.waitForAndValidateIntInput(1, 100)
         learned_skill = skill_options[roll_result - 1]
         await self.printLearnedSkill(learned_skill)
         return learned_skill
 
     async def printLearnedSkill(self, learned_skill):
-        await self.interaction.followup.send(f"You learned {learned_skill}!")
+        await self.print(f"You learned {learned_skill}!")
 
     async def promptFinalAbilityRoll(self, adv_disadv_dice, ability_name) -> int:
         advantage = adv_disadv_dice > 0
@@ -132,7 +137,7 @@ class CharacterGeneratorBot():
         prompt += str(abs(adv_disadv_dice) + 1) + "d6 "
         prompt += "take the highest" if advantage else "take the lowest" if disadvantage else ""
     
-        await self.interaction.followup.send(prompt)
+        await self.print(prompt)
         roll_result = await self.waitForAndValidateIntInput(1, 6)
         return roll_result
 
@@ -143,11 +148,15 @@ class CharacterGeneratorBot():
             if min_value <= num <= max_value:
                 return int(num)
             else:
-                await self.interaction.followup.send(f'Please enter a number between {min_value} and {max_value}.')
+                await self.print(f'Please enter a number between {min_value} and {max_value}.')
                 return await self.waitForAndValidateIntInput(min_value, max_value)
         else:
-            await self.interaction.followup.send('Please enter a valid roll result.')
+            await self.print('Please enter a valid roll result.')
             return await self.waitForAndValidateIntInput(min_value, max_value)
+
+    async def waitForAndValidateStringInput(self):
+        message = await self.bot.wait_for('message', check=self.isSameAuthorAndChannel)
+        return message.content.strip()
 
 class AdolescenceEventAnswerSelect(discord.ui.Select):
     def __init__(self, backstory_event: AdolescenceBackstoryEvent):

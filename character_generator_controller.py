@@ -35,7 +35,6 @@ class CharacterGeneratorController:
         character_sheet = await self.establishAdolescence(character_sheet)
         character_sheet = await self.establishAdulthood(character_sheet)
 
-        # await self.character_generator_bot.print(str(character_sheet))
         await self.printCharacterToFile(character_sheet)
 
     async def establishChildhood(self, character_sheet):
@@ -61,7 +60,7 @@ class CharacterGeneratorController:
         return character_sheet
 
     async def establishAdulthood(self, character_sheet):
-        await self.character_generator_bot.print("\nNow finishing up with adulthood...")
+        await self.character_generator_bot.presentAdulthoodIntroduction()
 
         for i in range(1, constants.NUM_ADULTHOOD_BACKSTORY_EVENTS + 1):
             profession = await self.character_generator_bot.promptAdulthoodProfessionChoice()
