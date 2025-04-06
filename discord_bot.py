@@ -24,7 +24,7 @@ async def on_ready():
 @bot.tree.command(name='ping')
 async def ping(interaction: discord.Interaction):
     print('Successful Ping from ' + interaction.client.user.name + '!')
-    await interaction.response.send_message('pong ' + interaction.client.user.name)
+    await interaction.response.send_message('pong ' + interaction.client.user.name, ephemeral=True)
 
 @bot.tree.command(name='chargen', description='Generate a character')
 async def chargen(interaction: discord.Interaction):

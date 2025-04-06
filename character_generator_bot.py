@@ -43,10 +43,10 @@ class CharacterGeneratorBot():
         return self._interaction
 
     async def print(self, string):
-        await self.interaction.followup.send(string)
+        await self.interaction.followup.send(string, ephemeral=True)
 
     async def printView(self, string, view = None):
-        await self.interaction.followup.send(string, view=view)
+        await self.interaction.followup.send(string, view=view, ephemeral=True)
 
     async def printFile(self, file, message = ""):
         await self.interaction.followup.send(message, file=discord.File(file, filename=os.path.basename(file.name)))
@@ -61,7 +61,7 @@ class CharacterGeneratorBot():
         await self.print("\nNow finishing up with adulthood...")
 
     async def promptCharacterName(self):
-        await self.interaction.response.send_message("What is your character's name?")
+        await self.interaction.response.send_message("What is your character's name?", ephemeral=True)
         return await self.waitForAndValidateStringInput()
 
     async def promptChildhoodStatRoll(self, ability: str, backstory_event_options: list[ChildhoodBackstoryEvent]):
