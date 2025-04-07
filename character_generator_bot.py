@@ -57,6 +57,9 @@ class CharacterGeneratorBot():
         else:
             return message.user == self.interaction.user and message.channel == self.interaction.channel
 
+    async def presentBackstorySummarizeLoadingAlert(self):
+        await self.print('Summarizing your character\'s backstory...')
+
     async def presentAdulthoodIntroduction(self):
         await self.print("\nNow finishing up with adulthood...")
 

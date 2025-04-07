@@ -6,8 +6,12 @@ class CharacterSheet:
         self._name = name
         self._HP = 0
         self._skills = []
+        self._summary = ""
         [setattr(self, ability, AbilityScore(ability)) for ability in ABILITY_NAMES]
         self.backstory = Backstory()
+
+    def summarizeBackstory(self):
+        self.backstory.summarize()
 
     @property
     def name(self) -> str:

@@ -35,6 +35,9 @@ class CharacterGeneratorController:
         character_sheet = await self.establishAdolescence(character_sheet)
         character_sheet = await self.establishAdulthood(character_sheet)
 
+        await self.character_generator_bot.presentBackstorySummarizeLoadingAlert()
+        character_sheet.summarizeBackstory()
+
         await self.printCharacterToFile(character_sheet)
 
     async def establishChildhood(self, character_sheet):
