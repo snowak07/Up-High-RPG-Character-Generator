@@ -11,7 +11,13 @@ For OpenAI integration you need the following additional setup:\
 NOTE: Might need to setup a python venv to install openai if you used Homebrew to install python.\
 NOTE: Use `source myenv/bin/activate` with each new terminal instance if you needed above step.
 
-# USAGE
+# DISCORD BOT USAGE
+Run the following to start the character generator.
+```
+python3 discord_bot.py
+```
+
+# CLI USAGE
 Run the following to start the character generator.
 ```
 python3 character_generator_controller.py

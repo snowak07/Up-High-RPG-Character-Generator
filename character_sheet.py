@@ -10,8 +10,8 @@ class CharacterSheet:
         [setattr(self, ability, AbilityScore(ability)) for ability in ABILITY_NAMES]
         self.backstory = Backstory()
 
-    def summarizeBackstory(self):
-        self.backstory.summarize()
+    async def summarizeBackstory(self):
+        await self.backstory.summarize()
 
     @property
     def name(self) -> str:

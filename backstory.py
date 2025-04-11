@@ -20,9 +20,8 @@ class Backstory:
             raise ValueError("Name must be a non-empty string.")
         self._summary = value
 
-    # TODO Return complete backstory string printout
     def __str__(self):
         return f"Childhood Backstory:\n{self.childhood}\n\nAdolescence Backstory:\n{self.adolescence}\n\nAdulthood Backstory:\n{self.adulthood}\n\nSummary:\n{self.summary}"
 
-    def summarize(self):
-        self.summary = getGPTSummary(str(self))
+    async def summarize(self):
+        self.summary = await getGPTSummary(str(self))

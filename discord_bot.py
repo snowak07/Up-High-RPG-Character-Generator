@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord import ui
 import asyncio
 from character_generator_controller import CharacterGeneratorController
+from discord_io_handler import DiscordIOHandler
 
 TOKEN = os.environ['DISCORD_PYTHON_API_KEY']
 
@@ -28,7 +29,8 @@ async def ping(interaction: discord.Interaction):
 
 @bot.tree.command(name='chargen', description='Generate a character')
 async def chargen(interaction: discord.Interaction):
-    controller = CharacterGeneratorController(bot, interaction)
+    discord_io_handler = DiscordIOHandler(bot, interaction)
+    controller = CharacterGeneratorController(discord_io_handler)
     await controller.start()
 
 bot.run(TOKEN)

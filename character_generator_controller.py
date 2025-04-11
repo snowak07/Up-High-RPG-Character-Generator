@@ -1,6 +1,4 @@
 # TODO: Handle loading already generated characters (from file?)
-# TODO: Add GPT backstroy summary option to character generation
-# TODO: Print to file
 # TODO: db class that handles retrieving of database data (constants file right now) (like BackstoryEvent lists)
 import constants
 import character_generator_bot
@@ -13,6 +11,7 @@ from adolescence_backstory import AdolescenceBackstory, AdolescenceBackstoryEven
 from adulthood_backstory import AdulthoodBackstoryEvent
 from character_sheet import CharacterSheet
 from character_generator_bot import CharacterGeneratorBot
+from io_handler import IOHandler
 
 gpt_provider_enabled = True
 try:
@@ -21,8 +20,8 @@ except ImportError:
     gpt_provider_enabled = False
 
 class CharacterGeneratorController:
-    def __init__(self, bot: discord.ext.commands.Bot, interaction: discord.Interaction):
-        self._character_generator_bot = CharacterGeneratorBot(bot, interaction)
+    def __init__(self, io_handler: IOHandler):
+        self._character_generator_bot = CharacterGeneratorBot(io_handler)
 
     @property
     def character_generator_bot(self) -> CharacterGeneratorBot:
@@ -36,7 +35,7 @@ class CharacterGeneratorController:
         character_sheet = await self.establishAdulthood(character_sheet)
 
         await self.character_generator_bot.presentBackstorySummarizeLoadingAlert()
-        character_sheet.summarizeBackstory()
+        await character_sheet.summarizeBackstory()
 
         await self.printCharacterToFile(character_sheet)
 
@@ -103,5 +102,5 @@ class CharacterGeneratorController:
 
         # Send to user over discord
         read_file = open("generated_characters/" + character_sheet.name + ".txt", "r")
-        await self.character_generator_bot.printFile(read_file)
+        await self.character_generator_bot.printCharacterToFile(read_file)
         read_file.close()
