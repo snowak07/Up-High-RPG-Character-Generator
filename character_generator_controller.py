@@ -11,7 +11,6 @@ from adolescence_backstory import AdolescenceBackstory, AdolescenceBackstoryEven
 from adulthood_backstory import AdulthoodBackstoryEvent
 from character_sheet import CharacterSheet
 from character_generator_bot import CharacterGeneratorBot
-from io_handler import IOHandler
 
 gpt_provider_enabled = True
 try:
@@ -20,8 +19,8 @@ except ImportError:
     gpt_provider_enabled = False
 
 class CharacterGeneratorController:
-    def __init__(self, io_handler: IOHandler):
-        self._character_generator_bot = CharacterGeneratorBot(io_handler)
+    def __init__(self, character_generator_bot: CharacterGeneratorBot):
+        self._character_generator_bot = character_generator_bot
 
     @property
     def character_generator_bot(self) -> CharacterGeneratorBot:
