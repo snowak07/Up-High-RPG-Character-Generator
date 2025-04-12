@@ -32,12 +32,6 @@ class DiscordIOHandler(IOHandler):
         self._bot = bot
         self._interaction = interaction
 
-    def isSameAuthorAndChannel(self, message):
-        if hasattr(message, "author"):
-            return message.author == self.interaction.user and message.channel == self.interaction.channel
-        else:
-            return message.user == self.interaction.user and message.channel == self.interaction.channel
-
     async def input(self, *, min_value=None, max_value=None, accepted_values=None, descriptions=None, prompt=""):
         if min_value != None and max_value != None:
             return await self.__inputInt(min_value, max_value)
@@ -50,6 +44,23 @@ class DiscordIOHandler(IOHandler):
             return view.select.selected_value
         else:
             return await self.__inputString()
+
+    async def __inputInt(self, min_value, max_value) -> int:
+        message = await self.bot.wait_for('message', check=self.isSameAuthorAndChannel)
+        if message.content.isdigit():
+            num = int(message.content)
+            if min_value <= num <= max_value:
+                return int(num)
+            else:
+                await self.output(f'Please enter a number between {min_value} and {max_value}.')
+                return await self.__inputInt(min_value, max_value)
+        else:
+            await self.output('Please enter a valid roll result.')
+            return await self.__inputInt(min_value, max_value)
+
+    async def __inputString(self):
+        message = await self.bot.wait_for('message', check=self.isSameAuthorAndChannel)
+        return message.content.strip()
 
     async def output(self, content, *, view=None, file=None):
         if not self.interaction.response.is_done():
@@ -74,22 +85,11 @@ class DiscordIOHandler(IOHandler):
             else:
                 await self.interaction.followup.send(content)
 
-    async def __inputInt(self, min_value, max_value) -> int:
-        message = await self.bot.wait_for('message', check=self.isSameAuthorAndChannel)
-        if message.content.isdigit():
-            num = int(message.content)
-            if min_value <= num <= max_value:
-                return int(num)
-            else:
-                await self.output(f'Please enter a number between {min_value} and {max_value}.')
-                return await self.__inputInt(min_value, max_value)
+    def isSameAuthorAndChannel(self, message):
+        if hasattr(message, "author"):
+            return message.author == self.interaction.user and message.channel == self.interaction.channel
         else:
-            await self.output('Please enter a valid roll result.')
-            return await self.__inputInt(min_value, max_value)
-
-    async def __inputString(self):
-        message = await self.bot.wait_for('message', check=self.isSameAuthorAndChannel)
-        return message.content.strip()
+            return message.user == self.interaction.user and message.channel == self.interaction.channel
 
 class SelectComponent(discord.ui.Select):
     def __init__(self, options: list[str], descriptions: list[str] = None, question: str = ""):
