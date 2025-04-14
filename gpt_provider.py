@@ -2,7 +2,7 @@ from openai import AsyncOpenAI
 
 client = AsyncOpenAI()
 
-async def getGPTSummary(prompt):
+async def getGPTSummary(prompt) -> str:
     completion = await client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[

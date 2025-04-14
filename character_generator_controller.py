@@ -15,14 +15,14 @@ except ImportError:
     gpt_provider_enabled = False
 
 class CharacterGeneratorController:
-    def __init__(self, character_generator_bot: CharacterGeneratorBot):
+    def __init__(self, character_generator_bot: CharacterGeneratorBot) -> None:
         self._character_generator_bot = character_generator_bot
 
     @property
     def character_generator_bot(self) -> CharacterGeneratorBot:
         return self._character_generator_bot
 
-    async def start(self):
+    async def start(self) -> None:
         character_sheet = CharacterSheet(await self.character_generator_bot.promptCharacterName())
 
         character_sheet = await self.establishChildhood(character_sheet)
@@ -34,7 +34,7 @@ class CharacterGeneratorController:
 
         await self.printCharacterToFile(character_sheet)
 
-    async def establishChildhood(self, character_sheet):
+    async def establishChildhood(self, character_sheet) -> CharacterSheet:
         for ability in constants.ABILITY_NAMES:
             character_sheet.addChildhoodEvent(await self.establishChildhoodEvent(ability))
 
@@ -47,7 +47,7 @@ class CharacterGeneratorController:
 
         return backstory_event
 
-    async def establishAdolescence(self, character_sheet):
+    async def establishAdolescence(self, character_sheet) -> CharacterSheet:
         potential_backstory_options = BackstoryEventProvider.getAdolescenceEventGroups()
         unresolved_backstory = await self.character_generator_bot.promptAdolescenceBackstoryGroup(potential_backstory_options)
 
@@ -56,7 +56,7 @@ class CharacterGeneratorController:
 
         return character_sheet
 
-    async def establishAdulthood(self, character_sheet):
+    async def establishAdulthood(self, character_sheet) -> CharacterSheet:
         await self.character_generator_bot.presentAdulthoodIntroduction()
 
         for i in range(1, constants.NUM_ADULTHOOD_BACKSTORY_EVENTS + 1):
@@ -81,7 +81,7 @@ class CharacterGeneratorController:
 
         return character_sheet
 
-    async def handleFinalAbilityRolls(self, character_sheet):
+    async def handleFinalAbilityRolls(self, character_sheet) -> CharacterSheet:
         for ability in constants.ABILITY_NAMES:
                 ability_score: AbilityScore = getattr(character_sheet, ability) # Fixme: Should be handled in CharacterSheet class
                 additive = await self.character_generator_bot.promptFinalAbilityRoll(ability_score.dice.value, ability_score.name)
@@ -89,7 +89,7 @@ class CharacterGeneratorController:
 
         return character_sheet
 
-    async def printCharacterToFile(self, character_sheet):
+    async def printCharacterToFile(self, character_sheet) -> None:
         # Save to server
         write_file = open("generated_characters/" + character_sheet.name + ".txt", "w")
         print(str(character_sheet), file=write_file)

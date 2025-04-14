@@ -34,5 +34,5 @@ class BackstoryEventProvider:
         return potential_events
 
     @staticmethod
-    def getChildhoodBackstoryEventList(ability):
+    def getChildhoodBackstoryEventList(ability) -> list[ChildhoodBackstoryEvent]:
         return [ChildhoodBackstoryEvent(ability, backstory_event['bonus'], backstory_event['lore']) for backstory_event in constants.CHILDHOOD_ROLL_MAPS[ability]]

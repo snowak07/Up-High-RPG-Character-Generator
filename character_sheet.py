@@ -2,7 +2,7 @@ from backstory import Backstory
 from constants import ABILITY_NAMES
 
 class CharacterSheet:
-    def __init__(self, name: str):
+    def __init__(self, name: str) -> None:
         self._name = name
         self._HP = 0
         self._skills = []
@@ -10,7 +10,7 @@ class CharacterSheet:
         [setattr(self, ability, AbilityScore(ability)) for ability in ABILITY_NAMES]
         self.backstory = Backstory()
 
-    async def summarizeBackstory(self):
+    async def summarizeBackstory(self) -> None:
         await self.backstory.summarize()
 
     @property
@@ -26,28 +26,28 @@ class CharacterSheet:
         return self._skills
 
     @name.setter
-    def name(self, value: str):
+    def name(self, value: str) -> None:
         if not isinstance(value, str) or not value.strip():
             raise ValueError("Name must be a non-empty string.")
         self._name = value
 
     @HP.setter
-    def HP(self, value: int):
+    def HP(self, value: int) -> None:
         if value < 0:
             raise ValueError("HP must be a non-negative integer.")
         self._HP = value
 
     @skills.setter
-    def skills(self, value: list[str]):
+    def skills(self, value: list[str]) -> None:
         if not isinstance(value, list) or not all(isinstance(skill, str) for skill in value):
             raise ValueError("Skills must be a list of strings.")
         self._skills = value
 
-    def addChildhoodEvent(self, event):
+    def addChildhoodEvent(self, event) -> None:
         self.backstory.childhood.addEvent(event)
         getattr(self, event.ability).add(event.bonus) # Add to ability score
 
-    def addAdolescenceEvent(self, event):
+    def addAdolescenceEvent(self, event) -> None:
         self.backstory.adolescence.addEvent(event)
         ability_chosen = event.answer
         ability_not_chosen = [ability for ability in event.answer_options if ability != ability_chosen][0]
@@ -56,7 +56,7 @@ class CharacterSheet:
         getattr(self, ability_chosen).add(higher_roll)
         getattr(self, ability_not_chosen).add(lower_roll)
 
-    def addAdulthoodEvent(self, event):
+    def addAdulthoodEvent(self, event) -> None:
         if event.isAbilityTest():
             # Add Advantage or Disadvantage to influenced ability score
             ability_score = getattr(self, event.influenced_ability)
@@ -70,7 +70,7 @@ class CharacterSheet:
 
         self.backstory.adulthood.addEvent(event)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'''
 {self.backstory}
 
@@ -83,46 +83,46 @@ Skills: {self.skills}
     '''
 
 class AbilityScore:
-    def __init__(self, name: str, value: int = 0, dice: 'AdvDisadvDice' = None):
+    def __init__(self, name: str, value: int = 0, dice: 'AdvDisadvDice' = None) -> None:
         self.name = name
         self.value = value
         self.dice = dice if dice is not None else AdvDisadvDice()
 
-    def __get__(self, instance, owner):
+    def __get__(self, instance, owner) -> AbilityScore:
         return self
 
-    def __set__(self, instance, value: int):
+    def __set__(self, instance, value: int) -> None:
         if value < 0 or value > 18:
             raise ValueError(f"{self.name} must be between 0 and 18.")
         self.value = value
 
-    def add(self, value: int):
+    def add(self, value: int) -> None:
         if not isinstance(value, int):
             raise ValueError("Value must be an integer.")
         self.value += value
 
-    def __add__(self, value: 'AbilityScore'):
+    def __add__(self, value: 'AbilityScore') -> AbilityScore:
         if not isinstance(value, AbilityScore):
             raise TypeError("Value must be an instance of AbilityScore.")
         return AbilityScore(self.name, self.value + value.value, self.dice)
 
-    def __iadd__(self, value: 'AbilityScore'):
+    def __iadd__(self, value: 'AbilityScore') -> None:
         if not isinstance(value, AbilityScore):
             raise TypeError("Value must be an instance of AbilityScore.")
         self.value += value.value
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name} ({self.value})"
 
 class AdvDisadvDice:
     '''Class for keeping track of the advantage and disadvantage dice accrued based on Adulthood ability tests'''
-    def __init__(self):
+    def __init__(self) -> None:
         self.value = 0
 
-    def add_adv(self):
+    def add_adv(self) -> None:
         self.value += 1
 
-    def add_disadv(self):
+    def add_disadv(self) -> None:
         self.value = self.value - 1
 
     def get_dice_modifier(self) -> int:

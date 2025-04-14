@@ -28,11 +28,11 @@ class DiscordIOHandler(IOHandler):
     def interaction(self) -> discord.Interaction:
         return self._interaction
 
-    def __init__(self, bot: discord.ext.commands.Bot, interaction: discord.Interaction):
+    def __init__(self, bot: discord.ext.commands.Bot, interaction: discord.Interaction) -> None:
         self._bot = bot
         self._interaction = interaction
 
-    async def input(self, *, min_value=None, max_value=None, accepted_values=None, descriptions=None, prompt=""):
+    async def input(self, *, min_value=None, max_value=None, accepted_values=None, descriptions=None, prompt="") -> str | int:
         if min_value != None and max_value != None:
             return await self.__inputInt(min_value, max_value)
         elif accepted_values != None:
@@ -58,11 +58,11 @@ class DiscordIOHandler(IOHandler):
             await self.output('Please enter a valid roll result.')
             return await self.__inputInt(min_value, max_value)
 
-    async def __inputString(self):
+    async def __inputString(self) -> str:
         message = await self.bot.wait_for('message', check=self.isSameAuthorAndChannel)
         return message.content.strip()
 
-    async def output(self, content, *, view=None, file=None):
+    async def output(self, content, *, view=None, file=None) -> None:
         if not self.interaction.response.is_done():
             if view:
                 await self.interaction.response.send_message(content, view=view, ephemeral=True)
@@ -85,14 +85,14 @@ class DiscordIOHandler(IOHandler):
             else:
                 await self.interaction.followup.send(content)
 
-    def isSameAuthorAndChannel(self, message):
+    def isSameAuthorAndChannel(self, message) -> bool:
         if hasattr(message, "author"):
             return message.author == self.interaction.user and message.channel == self.interaction.channel
         else:
             return message.user == self.interaction.user and message.channel == self.interaction.channel
 
 class SelectComponent(discord.ui.Select):
-    def __init__(self, options: list[str], descriptions: list[str] = None, question: str = ""):
+    def __init__(self, options: list[str], descriptions: list[str] = None, question: str = "") -> None:
         self.selected_value = ""
         self.question = question
         self.descriptions = descriptions
@@ -108,7 +108,7 @@ class SelectComponent(discord.ui.Select):
 
         super().__init__(placeholder="Choose an option", max_values=1, min_values=1, options=select_component_options)
 
-    async def callback(self, interaction: discord.Interaction):
+    async def callback(self, interaction: discord.Interaction) -> None:
         self.selected_value = self.values[0]
         after_interaction_content_edit = self.question
         if self.descriptions[0] != "":
@@ -119,7 +119,7 @@ class SelectComponent(discord.ui.Select):
         self.view.stop()
 
 class SelectView(discord.ui.View):
-    def __init__(self, *, accepted_values=None, descriptions=None, prompt="", timeout = 180):
+    def __init__(self, *, accepted_values=None, descriptions=None, prompt="", timeout = 180) -> None:
         super().__init__(timeout=timeout)
         self.select = SelectComponent(accepted_values, descriptions, prompt)
         self.add_item(self.select)

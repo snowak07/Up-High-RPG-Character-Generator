@@ -2,7 +2,7 @@ class AdolescenceBackstory:
     def __init__(self):
         self.events = []
 
-    def addEvent(self, event: 'AdolescenceBackstoryEvent', index: int = None):
+    def addEvent(self, event: 'AdolescenceBackstoryEvent', index: int = None) -> None:
         if not isinstance(event, AdolescenceBackstoryEvent):
             raise ValueError("Event must be an instance of AdolescenceBackstoryEvent.")
         if index != None and (index < 0 or index >= len(self.events)):
@@ -12,11 +12,11 @@ class AdolescenceBackstory:
         else:
             self.events[index] = event
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "\n\n".join([str(event) for event in self.events])
 
 class AdolescenceBackstoryEvent:
-    def __init__(self, question, question_options, answer_options):
+    def __init__(self, question, question_options, answer_options) -> None:
         self._question = question
         self._question_options = question_options
         self._answer_options = answer_options
@@ -44,25 +44,25 @@ class AdolescenceBackstoryEvent:
         return self._rolls
 
     @question.setter
-    def question(self, value: str):
+    def question(self, value: str) -> None:
         if not isinstance(value, str) or not value.strip():
             raise ValueError("Question must be a non-empty string.")
         self._question = value
 
     @question_options.setter
-    def question_options(self, value: dict[str, str]):
+    def question_options(self, value: dict[str, str]) -> None:
         if not isinstance(value, dict) or not all(isinstance(option, str) for option in value.values()):
             raise ValueError("Options must be a dict of strings.")
         self._question_options = value
 
     @answer_options.setter
-    def answer_options(self, value: list[str]):
+    def answer_options(self, value: list[str]) -> None:
         if not isinstance(value, list) or not all(isinstance(option, str) for option in value):
             raise ValueError("Options must be a list of strings.")
         self._answer_options = value
 
     @answer.setter
-    def answer(self, value: str):
+    def answer(self, value: str) -> None:
         if not isinstance(value, str) or not value.strip():
             raise ValueError("Answer must be a non-empty string.")
         if (len(self._answer_options) > 0 and value not in self._answer_options):
@@ -70,15 +70,15 @@ class AdolescenceBackstoryEvent:
         self._answer = value
 
     @rolls.setter
-    def rolls(self, value: list[int]):
+    def rolls(self, value: list[int]) -> None:
         if not isinstance(value, list) or not all(isinstance(roll, int) for roll in value):
             raise ValueError("Rolls must be a list of integers.")
         self._rolls = value
 
-    def addRoll(self, roll: int):
+    def addRoll(self, roll: int) -> None:
         if not isinstance(roll, int) or roll < 1 or roll > 6:
             raise ValueError("The roll must be a positive integer from 1 to 6, inclusive.")
         self._rolls.append(roll)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.question}\n{"\n".join(["- " + option for ability, option in self.question_options.items()])}\nYou chose the {self.answer} option."
