@@ -87,7 +87,7 @@ class CharacterGeneratorController:
 
     async def handleFinalAbilityRolls(self, character_sheet):
         for ability in constants.ABILITY_NAMES:
-                ability_score: AbilityScore = getattr(character_sheet, ability)
+                ability_score: AbilityScore = getattr(character_sheet, ability) # Fixme: Should be handled in CharacterSheet class
                 additive = await self.character_generator_bot.promptFinalAbilityRoll(ability_score.dice.value, ability_score.name)
                 ability_score.add(additive)
 

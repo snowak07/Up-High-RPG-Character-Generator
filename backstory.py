@@ -17,7 +17,7 @@ class Backstory:
     @summary.setter
     def summary(self, value: str):
         if not isinstance(value, str) or not value.strip():
-            raise ValueError("Name must be a non-empty string.")
+            raise ValueError("Summary must be a non-empty string.")
         self._summary = value
 
     def __str__(self):

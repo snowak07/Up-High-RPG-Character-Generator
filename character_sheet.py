@@ -74,12 +74,12 @@ class CharacterSheet:
         return f'''
 {self.backstory}
 
-------------------------------------------------------
+-----------------------------------------------------------------
 Final Results:
 | {" | ".join([str(getattr(self, ability_name)) for ability_name in ABILITY_NAMES])} |
 
 Skills: {self.skills}
-------------------------------------------------------
+-----------------------------------------------------------------
     '''
 
 class AbilityScore:
