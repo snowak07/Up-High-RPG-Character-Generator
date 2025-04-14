@@ -1,7 +1,7 @@
 from adulthood_backstory import AdulthoodBackstoryEvent
 from adolescence_backstory import AdolescenceBackstoryEvent, AdolescenceBackstory
 from childhood_backstory import ChildhoodBackstoryEvent
-from constants import ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP, PROFESSIONS
+from constants import ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP, CHILDHOOD_ROLL_MAPS, PROFESSIONS
 
 class BackstoryEventProvider:
     instance = None
@@ -35,4 +35,4 @@ class BackstoryEventProvider:
 
     @staticmethod
     def getChildhoodBackstoryEventList(ability) -> list[ChildhoodBackstoryEvent]:
-        return [ChildhoodBackstoryEvent(ability, backstory_event['bonus'], backstory_event['lore']) for backstory_event in constants.CHILDHOOD_ROLL_MAPS[ability]]
+        return [ChildhoodBackstoryEvent(ability, backstory_event['bonus'], backstory_event['lore']) for backstory_event in CHILDHOOD_ROLL_MAPS[ability]]

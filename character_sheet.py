@@ -88,7 +88,7 @@ class AbilityScore:
         self.value = value
         self.dice = dice if dice is not None else AdvDisadvDice()
 
-    def __get__(self, instance, owner) -> AbilityScore:
+    def __get__(self, instance, owner) -> 'AbilityScore':
         return self
 
     def __set__(self, instance, value: int) -> None:
@@ -101,7 +101,7 @@ class AbilityScore:
             raise ValueError("Value must be an integer.")
         self.value += value
 
-    def __add__(self, value: 'AbilityScore') -> AbilityScore:
+    def __add__(self, value: 'AbilityScore') -> 'AbilityScore':
         if not isinstance(value, AbilityScore):
             raise TypeError("Value must be an instance of AbilityScore.")
         return AbilityScore(self.name, self.value + value.value, self.dice)
