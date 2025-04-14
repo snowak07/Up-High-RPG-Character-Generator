@@ -1,16 +1,12 @@
-# TODO: Handle loading already generated characters (from file?)
-# TODO: db class that handles retrieving of database data (constants file right now) (like BackstoryEvent lists)
 import constants
-import character_generator_bot
-import discord
 import math
 import sys
-from backstory_event_provider import BackstoryEventProvider
-from childhood_backstory import ChildhoodBackstoryEvent
 from adolescence_backstory import AdolescenceBackstory, AdolescenceBackstoryEvent
 from adulthood_backstory import AdulthoodBackstoryEvent
+from backstory_event_provider import BackstoryEventProvider
 from character_sheet import CharacterSheet
 from character_generator_bot import CharacterGeneratorBot
+from childhood_backstory import ChildhoodBackstoryEvent
 
 gpt_provider_enabled = True
 try:
@@ -99,7 +95,7 @@ class CharacterGeneratorController:
         print(str(character_sheet), file=write_file)
         write_file.close()
 
-        # Send to user over discord
+        # Send character sheet file to user
         read_file = open("generated_characters/" + character_sheet.name + ".txt", "r")
         await self.character_generator_bot.printCharacterToFile(read_file)
         read_file.close()

@@ -1,8 +1,8 @@
 import os
 import discord
 from discord.ext import commands
-from character_generator_controller import CharacterGeneratorController
 from character_generator_bot import CharacterGeneratorBot
+from character_generator_controller import CharacterGeneratorController
 from discord_io_handler import DiscordIOHandler
 from discord_random_io_handler import DiscordIOHandlerTest
 

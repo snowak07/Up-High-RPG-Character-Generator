@@ -1,5 +1,5 @@
-from constants import ABILITY_NAMES
 from backstory import Backstory
+from constants import ABILITY_NAMES
 
 class CharacterSheet:
     def __init__(self, name: str):

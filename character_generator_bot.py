@@ -1,34 +1,11 @@
-# TODO What imports are required?
-# TODO type hinting for all functions
-import discord
-from character_sheet import AbilityScore
-from childhood_backstory import ChildhoodBackstoryEvent
-from adolescence_backstory import AdolescenceBackstory, AdolescenceBackstoryEvent
-from adulthood_backstory import AdulthoodBackstoryEvent
-from constants import PROFESSION_NAMES
-from io_handler import IOHandler
 import math
 import os
-
-ABILITY_EMOJI_MAP = {
-    "STR": "💪",
-    "DEX": "🤸",
-    "CON": "🛡️",
-    "INT": "🧠",
-    "WIS": "🦉",
-    "CHA": "🎭"
-}
-
-PROFESSION_EMOJI_MAP = {
-    "Army": "🛡️",
-    "Clergy": "⛪",
-    "Criminal": "🕶️",
-    "Forest": "🌲",
-    "Noble": "👑",
-    "Rural": "🌾",
-    "Town": "🏘️",
-    "Wizard's Apprentice": "🧙‍♂️"
-}
+from adolescence_backstory import AdolescenceBackstory, AdolescenceBackstoryEvent
+from adulthood_backstory import AdulthoodBackstoryEvent
+from character_sheet import AbilityScore
+from childhood_backstory import ChildhoodBackstoryEvent
+from constants import PROFESSION_NAMES
+from io_handler import IOHandler
 
 class CharacterGeneratorBot():
     @property

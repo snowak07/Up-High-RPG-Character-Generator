@@ -1,7 +1,6 @@
 import discord
 import os
 import random
-import time
 from discord_io_handler import DiscordIOHandler
 
 class DiscordIOHandlerTest(DiscordIOHandler):

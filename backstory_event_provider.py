@@ -1,7 +1,7 @@
 from adulthood_backstory import AdulthoodBackstoryEvent
 from adolescence_backstory import AdolescenceBackstoryEvent, AdolescenceBackstory
 from childhood_backstory import ChildhoodBackstoryEvent
-import constants
+from constants import ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP, PROFESSIONS
 
 class BackstoryEventProvider:
     instance = None
@@ -10,7 +10,7 @@ class BackstoryEventProvider:
     def getAdolescenceEventGroups() -> list[AdolescenceBackstory]:
         '''Construct list of potential backstory event lists'''
         backstory_event_group_options = []
-        for question_group in constants.ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP:
+        for question_group in ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP:
             backstory = AdolescenceBackstory()
             for adolescence_event_data in question_group:
                 backstory.addEvent(AdolescenceBackstoryEvent(adolescence_event_data['question'], adolescence_event_data['question_options'], adolescence_event_data['answer_options']))
@@ -22,7 +22,7 @@ class BackstoryEventProvider:
     def getAdulthoodProfessionEventList(profession) -> list[AdulthoodBackstoryEvent]:
         '''Construct list of potential backstory events for chosen profession'''
         potential_events: list[AdulthoodBackstoryEvent] = []
-        for potential_event_data in constants.PROFESSIONS[profession]['scenarios']:
+        for potential_event_data in PROFESSIONS[profession]['scenarios']:
             potential_events.append(AdulthoodBackstoryEvent(
                 profession,
                 potential_event_data['scenario'],

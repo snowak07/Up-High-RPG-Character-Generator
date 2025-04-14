@@ -1,6 +1,6 @@
 import discord
-from io_handler import IOHandler
 import os
+from io_handler import IOHandler
 
 EMOJI_MAP = {
     "STR": "💪",
