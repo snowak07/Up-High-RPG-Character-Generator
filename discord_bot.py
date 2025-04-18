@@ -1,7 +1,6 @@
 import os
 import discord
 from discord.ext import commands
-from character_generator_bot import CharacterGeneratorBot
 from character_generator_controller import CharacterGeneratorController
 from discord_io_handler import DiscordIOHandler
 from discord_random_io_handler import DiscordIOHandlerTest
@@ -30,16 +29,14 @@ async def ping(interaction: discord.Interaction) -> None:
 @bot.tree.command(name='chargen', description='Generate a character')
 async def chargen(interaction: discord.Interaction) -> None:
     discord_io_handler = DiscordIOHandler(bot, interaction)
-    character_generator_bot = CharacterGeneratorBot(discord_io_handler)
-    controller = CharacterGeneratorController(character_generator_bot)
+    controller = CharacterGeneratorController(discord_io_handler)
     await controller.start()
 
 @bot.tree.command(name='randchargen', description='Randonly generate a character')
 async def chargen(interaction: discord.Interaction) -> None:
     discord_random_io_handler = DiscordIOHandlerTest(bot, interaction)
     await discord_random_io_handler.initialize()
-    character_generator_bot = CharacterGeneratorBot(discord_random_io_handler)
-    controller = CharacterGeneratorController(character_generator_bot)
+    controller = CharacterGeneratorController(discord_random_io_handler)
     await controller.start()
 
 bot.run(TOKEN)

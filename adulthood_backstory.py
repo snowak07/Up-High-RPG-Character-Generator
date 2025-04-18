@@ -1,8 +1,10 @@
 from constants import ABILITY_NAMES, PROFESSION_NAMES
+from ability_score import AbilityScore
 
 class AdulthoodBackstory:
     def __init__(self) -> None:
         self.events = []
+        self.ability_bonuses = {}
 
     def addEvent(self, event: 'AdulthoodBackstoryEvent', index: int = None) -> None:
         if not isinstance(event, AdulthoodBackstoryEvent):
@@ -13,6 +15,14 @@ class AdulthoodBackstory:
             raise IndexError("Index out of range.")
         else:
             self.events[index] = event
+
+    def addAbilityBonus(self, ability_name, ability_score: 'AbilityScore') -> None:
+        if not isinstance(ability_score, AbilityScore):
+            raise ValueError("Ability score must be an instance of AbilityScore.")
+        elif ability_name not in ABILITY_NAMES:
+            raise ValueError(f"Ability name must be one of the following: {ABILITY_NAMES}")
+        else:
+            self.ability_bonuses[ability_name] = ability_score
 
     def __str__(self) -> str:
         return "\n\n".join([(f"For period {index+1} of {len(self.events)} your background was {event.profession}. You faced the following scenario:\n{event}") for index, event in enumerate(self.events)]) # FIXME key, value work?
