@@ -1,6 +1,6 @@
-from models.adolescence_backstory import AdolescenceBackstory, AdolescenceBackstoryEvent
-from constants import ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP
-from io.io_handler import IOHandler
+from ..models.adolescence_backstory import AdolescenceBackstory, AdolescenceBackstoryEvent
+from ..constants import ADOLESCENT_QUESTION_GROUP_DECISION_ROLL_MAP
+from ..io.io_handler import IOHandler
 import math
 
 class AdolescenceBackstoryBuilder():

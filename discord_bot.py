@@ -1,9 +1,9 @@
 import os
 import discord
 from discord.ext import commands
-from builders.character_sheet_builder import CharacterSheetBuilder
-from io.discord_io_handler import DiscordIOHandler
-from io.discord_random_io_handler import DiscordRandomIOHandler
+from .builders.character_sheet_builder import CharacterSheetBuilder
+from .io.discord_io_handler import DiscordIOHandler
+from .io.discord_random_io_handler import DiscordRandomIOHandler
 
 TOKEN = os.environ['DISCORD_PYTHON_API_KEY']
 

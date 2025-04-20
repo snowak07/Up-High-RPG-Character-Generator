@@ -1,4 +1,4 @@
-from constants import ABILITY_NAMES
+from ..constants import ABILITY_NAMES
 
 class ChildhoodBackstory:
     def __init__(self) -> None:

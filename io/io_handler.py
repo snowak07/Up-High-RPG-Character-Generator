@@ -16,7 +16,7 @@ class IOHandler():
 
     def saveFile(self, content, filename) -> None:
         '''Save file and return file and file location'''
-        file_location = f"generated_characters/{filename}.txt"
+        file_location = f"up_high_character_gen/generated_characters/{filename}.txt"
         write_file = open(file_location, "w")
         print(content, file=write_file)
         write_file.close()

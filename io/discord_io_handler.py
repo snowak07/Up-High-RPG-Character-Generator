@@ -1,5 +1,5 @@
 import discord
-from io.io_handler import IOHandler
+from .io_handler import IOHandler
 
 EMOJI_MAP = {
     "STR": "💪",

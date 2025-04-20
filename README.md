@@ -14,7 +14,7 @@ NOTE: Use `source myenv/bin/activate` with each new terminal instance if you nee
 # DISCORD BOT USAGE
 Run the following to start the character generator.
 ```
-python3 discord_bot.py
+python3 -m up_high_character_gen.discord_bot
 ```
 
 # CLI USAGE

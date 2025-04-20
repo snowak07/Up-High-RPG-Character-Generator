@@ -1,5 +1,5 @@
-from constants import ABILITY_NAMES, PROFESSION_NAMES
-from models.ability_score import AbilityScore
+from ..constants import ABILITY_NAMES, PROFESSION_NAMES
+from .ability_score import AbilityScore
 
 class AdulthoodBackstory:
     def __init__(self) -> None:

@@ -1,4 +1,4 @@
-from constants import ABILITY_NAMES, CHILDHOOD_ROLL_MAPS
+from ..constants import ABILITY_NAMES, CHILDHOOD_ROLL_MAPS
 from ..models.childhood_backstory import ChildhoodBackstory, ChildhoodBackstoryEvent
 from ..io.io_handler import IOHandler
 

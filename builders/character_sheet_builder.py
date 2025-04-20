@@ -1,7 +1,7 @@
-from models.character_sheet import CharacterSheet
-from builders.adolescence_backstory_builder import AdolescenceBackstoryBuilder
-from builders.adulthood_backstory_builder import AdulthoodBackstoryBuilder
-from builders.childhood_backstory_builder import ChildhoodBackstoryBuilder
+from ..models.character_sheet import CharacterSheet
+from .adolescence_backstory_builder import AdolescenceBackstoryBuilder
+from .adulthood_backstory_builder import AdulthoodBackstoryBuilder
+from .childhood_backstory_builder import ChildhoodBackstoryBuilder
 from ..io.io_handler import IOHandler
 
 gpt_provider_enabled = True

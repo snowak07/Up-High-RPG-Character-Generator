@@ -1,6 +1,6 @@
-from models.ability_score import AbilityScore
-from models.backstory import Backstory
-from constants import ABILITY_NAMES
+from .ability_score import AbilityScore
+from .backstory import Backstory
+from ..constants import ABILITY_NAMES
 
 class CharacterSheet:
     def __init__(self, name: str) -> None:
