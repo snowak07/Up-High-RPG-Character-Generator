@@ -58,9 +58,7 @@ class AdulthoodBackstoryBuilder():
 
     async def handleFinalAbilityRolls(self, backstory, ability_score_dice) -> AdulthoodBackstory:
         for ability_name, ability_score_die in ability_score_dice.items():
-                # ability_score: AbilityScore = getattr(character_sheet, ability) # Fixme: Should be handled in CharacterSheet class
                 additive = await self.promptFinalAbilityRoll(ability_score_die.value, ability_name)
-                # ability_score.add(additive)
                 backstory.addAbilityBonus(ability_name, AbilityScore(ability_name, additive))
 
         return backstory
