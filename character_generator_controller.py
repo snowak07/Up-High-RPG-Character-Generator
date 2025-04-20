@@ -1,11 +1,4 @@
-import constants
-import math
-import sys
-from adolescence_backstory import AdolescenceBackstory, AdolescenceBackstoryEvent
-from adulthood_backstory import AdulthoodBackstoryEvent
-from backstory_event_provider import BackstoryEventProvider
 from character_sheet import CharacterSheet
-from childhood_backstory import ChildhoodBackstoryEvent
 from adolescence_backstory_builder import AdolescenceBackstoryBuilder
 from adulthood_backstory_builder import AdulthoodBackstoryBuilder
 from childhood_backstory_builder import ChildhoodBackstoryBuilder
@@ -36,15 +29,4 @@ class CharacterGeneratorController:
         await self.io_handler.output('Summarizing your character\'s backstory...')
         await character_sheet.summarizeBackstory()
 
-        await self.printCharacterToFile(character_sheet)
-
-    async def printCharacterToFile(self, character_sheet) -> None:
-        # Save to server
-        write_file = open("generated_characters/" + character_sheet.name + ".txt", "w")
-        print(str(character_sheet), file=write_file)
-        write_file.close()
-
-        # Send character sheet file to user
-        read_file = open("generated_characters/" + character_sheet.name + ".txt", "r")
-        await self.io_handler.output("", file=read_file)
-        read_file.close()
+        await self.io_handler.outputFile(str(character_sheet), character_sheet.name)

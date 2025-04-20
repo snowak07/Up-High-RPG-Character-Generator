@@ -1,5 +1,4 @@
 import discord
-import os
 from io_handler import IOHandler
 
 EMOJI_MAP = {
@@ -62,28 +61,32 @@ class DiscordIOHandler(IOHandler):
         message = await self.bot.wait_for('message', check=self.isSameAuthorAndChannel)
         return message.content.strip()
 
-    async def output(self, content, *, view=None, file=None) -> None:
+    async def output(self, content, *, view=None) -> None:
         if not self.interaction.response.is_done():
             if view:
                 await self.interaction.response.send_message(content, view=view, ephemeral=True)
-            elif file:
-                await self.interaction.response.send_message(
-                    content,
-                    file=discord.File(file, filename=os.path.basename(file.name))
-                )
             else:
                 await self.interaction.response.send_message(content)
         else:
             if view:
                 await self.interaction.followup.send(content, view=view, ephemeral=True)
-            elif file:
-                # Not ephemeral when sending files so anyone can see them.
-                await self.interaction.followup.send(
-                    content,
-                    file=discord.File(file, filename=os.path.basename(file.name))
-                )
             else:
                 await self.interaction.followup.send(content)
+
+    async def outputFile(self, content, filename) -> None:
+        file_location = self.saveFile(content, filename)
+
+        if not self.interaction.response.is_done():
+            # Not ephemeral when sending files so anyone can see them.
+            await self.interaction.response.send_message(
+                file=discord.File(file_location)
+            )
+
+        else:
+            # Not ephemeral when sending files so anyone can see them.
+            await self.interaction.followup.send(
+                file=discord.File(file_location)
+            )
 
     def isSameAuthorAndChannel(self, message) -> bool:
         if hasattr(message, "author"):

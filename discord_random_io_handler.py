@@ -1,9 +1,7 @@
-import discord
-import os
 import random
 from discord_io_handler import DiscordIOHandler
 
-class DiscordIOHandlerTest(DiscordIOHandler):
+class DiscordRandomIOHandler(DiscordIOHandler):
     async def initialize(self) -> None:
         await self.interaction.response.send_message("Generating Character.....")
 
@@ -15,9 +13,6 @@ class DiscordIOHandlerTest(DiscordIOHandler):
         else:
             return "foobar"
 
-    async def output(self, content, *, view=None, file=None) -> None:
-        if file:
-            await self.interaction.followup.send(
-                    content,
-                    file=discord.File(file, filename=os.path.basename(file.name))
-                )
+    async def output(self, content, *, view=None) -> None:
+        # No output when randomly generating character
+        return

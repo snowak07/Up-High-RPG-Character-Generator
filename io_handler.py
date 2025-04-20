@@ -8,5 +8,17 @@ class IOHandler():
     def __inputString(self) -> str:
         raise NotImplementedError("Subclasses must implement this method")
 
-    def output(self, content, file=None) -> None:
+    def outputFile(self, content, filename) -> None:
         raise NotImplementedError("Subclasses must implement this method")
+
+    def output(self, content) -> None:
+        raise NotImplementedError("Subclasses must implement this method")
+
+    def saveFile(self, content, filename) -> None:
+        '''Save file and return file and file location'''
+        file_location = f"generated_characters/{filename}.txt"
+        write_file = open(file_location, "w")
+        print(content, file=write_file)
+        write_file.close()
+
+        return file_location

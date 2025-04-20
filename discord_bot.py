@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 from character_generator_controller import CharacterGeneratorController
 from discord_io_handler import DiscordIOHandler
-from discord_random_io_handler import DiscordIOHandlerTest
+from discord_random_io_handler import DiscordRandomIOHandler
 
 TOKEN = os.environ['DISCORD_PYTHON_API_KEY']
 
@@ -34,7 +34,7 @@ async def chargen(interaction: discord.Interaction) -> None:
 
 @bot.tree.command(name='randchargen', description='Randonly generate a character')
 async def chargen(interaction: discord.Interaction) -> None:
-    discord_random_io_handler = DiscordIOHandlerTest(bot, interaction)
+    discord_random_io_handler = DiscordRandomIOHandler(bot, interaction)
     await discord_random_io_handler.initialize()
     controller = CharacterGeneratorController(discord_random_io_handler)
     await controller.start()

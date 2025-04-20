@@ -2,6 +2,7 @@ class AdolescenceBackstory:
     def __init__(self):
         self.events = []
 
+    # Use __add__ special method for all "add" functions
     def addEvent(self, event: 'AdolescenceBackstoryEvent', index: int = None) -> None:
         if not isinstance(event, AdolescenceBackstoryEvent):
             raise ValueError("Event must be an instance of AdolescenceBackstoryEvent.")
