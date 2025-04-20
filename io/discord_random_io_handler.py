@@ -1,5 +1,5 @@
 import random
-from discord_io_handler import DiscordIOHandler
+from io.discord_io_handler import DiscordIOHandler
 
 class DiscordRandomIOHandler(DiscordIOHandler):
     async def initialize(self) -> None:

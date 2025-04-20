@@ -1,5 +1,5 @@
-from ability_score import AbilityScore
-from backstory import Backstory
+from models.ability_score import AbilityScore
+from models.backstory import Backstory
 from constants import ABILITY_NAMES
 
 class CharacterSheet:

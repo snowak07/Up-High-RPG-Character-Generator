@@ -1,8 +1,8 @@
-from character_sheet import CharacterSheet
-from adolescence_backstory_builder import AdolescenceBackstoryBuilder
-from adulthood_backstory_builder import AdulthoodBackstoryBuilder
-from childhood_backstory_builder import ChildhoodBackstoryBuilder
-from io_handler import IOHandler
+from models.character_sheet import CharacterSheet
+from builders.adolescence_backstory_builder import AdolescenceBackstoryBuilder
+from builders.adulthood_backstory_builder import AdulthoodBackstoryBuilder
+from builders.childhood_backstory_builder import ChildhoodBackstoryBuilder
+from ..io.io_handler import IOHandler
 
 gpt_provider_enabled = True
 try:
@@ -10,7 +10,7 @@ try:
 except ImportError:
     gpt_provider_enabled = False
 
-class CharacterGeneratorController:
+class CharacterSheetBuilder:
     def __init__(self, io_handler: IOHandler) -> None:
         self._io_handler = io_handler
 

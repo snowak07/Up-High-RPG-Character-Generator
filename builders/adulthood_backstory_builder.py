@@ -1,7 +1,7 @@
-from adulthood_backstory import AdulthoodBackstory, AdulthoodBackstoryEvent
-from ability_score import AbilityScore
+from ..models.adulthood_backstory import AdulthoodBackstory, AdulthoodBackstoryEvent
+from ..models.ability_score import AbilityScore
 from constants import ABILITY_NAMES, NUM_ADULTHOOD_BACKSTORY_EVENTS, PROFESSIONS, PROFESSION_NAMES, RANDOM_SKILLS
-from io_handler import IOHandler
+from ..io.io_handler import IOHandler
 
 class AdulthoodBackstoryBuilder():
     @property

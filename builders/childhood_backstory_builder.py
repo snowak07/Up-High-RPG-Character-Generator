@@ -1,6 +1,6 @@
 from constants import ABILITY_NAMES, CHILDHOOD_ROLL_MAPS
-from childhood_backstory import ChildhoodBackstory, ChildhoodBackstoryEvent
-from io_handler import IOHandler
+from ..models.childhood_backstory import ChildhoodBackstory, ChildhoodBackstoryEvent
+from ..io.io_handler import IOHandler
 
 class ChildhoodBackstoryBuilder():
     @property

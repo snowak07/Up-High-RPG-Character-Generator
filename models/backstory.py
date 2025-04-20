@@ -1,6 +1,6 @@
-from adolescence_backstory import AdolescenceBackstory
-from adulthood_backstory import AdulthoodBackstory
-from childhood_backstory import ChildhoodBackstory
+from models.adolescence_backstory import AdolescenceBackstory
+from models.adulthood_backstory import AdulthoodBackstory
+from models.childhood_backstory import ChildhoodBackstory
 from gpt_provider import getGPTSummary
 
 class Backstory:
