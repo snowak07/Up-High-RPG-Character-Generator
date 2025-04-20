@@ -12,9 +12,9 @@ NOTE: Might need to setup a python venv to install openai if you used Homebrew t
 NOTE: Use `source myenv/bin/activate` with each new terminal instance if you needed above step.
 
 # DISCORD BOT USAGE
-Run the following to start the character generator.
+Run the following to start the discord bot.
 ```
-python3 -m up_high_character_gen.discord_bot
+python3 -m src.discord_bot
 ```
 
 # CLI USAGE
