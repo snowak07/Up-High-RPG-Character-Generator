@@ -68,18 +68,14 @@ class CharacterSheet:
 
     def addAdulthoodBackstory(self, backstory) -> None:
         self.backstory.adulthood = backstory
+        for ability_name, ability_score in backstory.ability_bonuses.items():
+            getattr(self, ability_name).add(ability_score.value)
+
         for event in backstory.events:
             self.addAdulthoodEvent(event)
 
     def addAdulthoodEvent(self, event) -> None:
-        if event.isAbilityTest():
-            # Add Advantage or Disadvantage to influenced ability score
-            ability_score = getattr(self, event.influenced_ability)
-            if event.passed_test:
-                ability_score.dice.add_adv()
-            else:
-                ability_score.dice.add_disadv()
-        elif event.learned_skill != "":
+        if event.isLearnedSkill():
             # Add skill
             self.skills.append(event.learned_skill)
 

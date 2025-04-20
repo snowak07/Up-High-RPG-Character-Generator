@@ -106,10 +106,10 @@ class AdulthoodBackstoryEvent:
         return self.tested_ability != ""
 
     def isRandomSkill(self) -> bool:
-        return self.learned_skill == "Random"
+        return self.learned_skill and self.learned_skill == "Random"
 
     def isLearnedSkill(self) -> bool:
-        return self.learned_skill != "Random"
+        return self.learned_skill and self.learned_skill != "Random"
 
     def __str__(self) -> str:
         string = self.scenario + "\n"
