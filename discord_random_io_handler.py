@@ -3,7 +3,7 @@ from discord_io_handler import DiscordIOHandler
 
 class DiscordRandomIOHandler(DiscordIOHandler):
     async def initialize(self) -> None:
-        await self.interaction.response.send_message("Generating Character.....")
+        await self.send(content="Generating Character.....")
 
     async def input(self, *, min_value=None, max_value=None, accepted_values=None, descriptions=None, prompt="") -> None:
         if min_value and max_value:

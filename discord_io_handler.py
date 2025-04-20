@@ -62,37 +62,37 @@ class DiscordIOHandler(IOHandler):
         return message.content.strip()
 
     async def output(self, content, *, view=None) -> None:
-        if not self.interaction.response.is_done():
-            if view:
-                await self.interaction.response.send_message(content, view=view, ephemeral=True)
-            else:
-                await self.interaction.response.send_message(content)
+        if view:
+            await self.send(content=content, view=view, ephemeral=True)
         else:
-            if view:
-                await self.interaction.followup.send(content, view=view, ephemeral=True)
-            else:
-                await self.interaction.followup.send(content)
+            await self.send(content=content, ephemeral=True)
 
     async def outputFile(self, content, filename) -> None:
         file_location = self.saveFile(content, filename)
-
-        if not self.interaction.response.is_done():
-            # Not ephemeral when sending files so anyone can see them.
-            await self.interaction.response.send_message(
-                file=discord.File(file_location)
-            )
-
-        else:
-            # Not ephemeral when sending files so anyone can see them.
-            await self.interaction.followup.send(
-                file=discord.File(file_location)
-            )
+        await self.send(file=discord.File(file_location))
 
     def isSameAuthorAndChannel(self, message) -> bool:
         if hasattr(message, "author"):
             return message.author == self.interaction.user and message.channel == self.interaction.channel
         else:
             return message.user == self.interaction.user and message.channel == self.interaction.channel
+
+    async def send(self, *, content=None, view=None, file=None, ephemeral=None):
+        args = {
+            "content": content,
+            "view": view,
+            "file": file,
+            "ephemeral": ephemeral
+        }
+
+        # Filter out any arguments with a value of None
+        args = {key: value for key, value in args.items() if value is not None}
+
+        if not self.interaction.response.is_done():
+            await self.interaction.response.send_message(**args)
+
+        else:
+            await self.interaction.followup.send(**args)
 
 class SelectComponent(discord.ui.Select):
     def __init__(self, options: list[str], descriptions: list[str] = None, question: str = "") -> None:
